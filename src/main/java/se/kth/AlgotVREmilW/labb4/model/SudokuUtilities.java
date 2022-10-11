@@ -1,4 +1,4 @@
-package se.kth.anderslm.sudoku3.logic;
+package se.kth.AlgotVREmilW.labb4.model;
 
 public class SudokuUtilities {
 
