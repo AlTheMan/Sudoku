@@ -78,7 +78,11 @@ public class SudokuModel {
     //TODO: göra psuedorandom generering för spelplanen
     // updatera oxå gameCopy
 
-    public void randomizeGameBoard() {
+    /**
+     * Randomizes two numbers between 1-9 to switch with each other.
+     * Changes both the player board and the solution board.
+     */
+    public void randomizeGameBoard() { //TODO: make private and maybe reverse the array?
         Random rand = new Random();
         int rand1 = rand.nextInt(9) + 1;
         int rand2 = rand1;
