@@ -32,7 +32,7 @@ public class GridView {
                 tile.setFont(font);
                 tile.setAlignment(Pos.CENTER);
                 tile.setStyle("-fx-border-color: black; -fx-border-width: 0.5px;"); // css style
-                tile.setOnMouseClicked(tileClickHandler); // add your custom event handler
+                //tile.setOnMouseClicked(tileClickHandler); // add your custom event handler
                 // add new tile to grid
                 numberTiles[row][col] = tile;
             }
