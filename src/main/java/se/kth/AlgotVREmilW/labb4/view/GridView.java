@@ -20,6 +20,10 @@ public class GridView {
         // ...
     }
 
+    public TilePane getPane(){
+        return numberPane;
+    }
+
     // called by constructor (only)
     private final void initNumberTiles() {
         Font font = Font.font("Monospaced", FontWeight.NORMAL, 20);

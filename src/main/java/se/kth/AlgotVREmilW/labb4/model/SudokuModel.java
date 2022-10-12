@@ -18,6 +18,8 @@ public class SudokuModel {
 //        }
 //    }
 
+    //getters för int[][][0] till GridView
+
     private void makeGameCopy(){
         for(int i =0; i<GRID_SIZE; i++){
             for(int j=0; j<GRID_SIZE; j++){
