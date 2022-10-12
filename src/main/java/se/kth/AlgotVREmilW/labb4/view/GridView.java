@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
 
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 
@@ -12,12 +13,15 @@ public class GridView {
     private Label[][] numberTiles; // the tiles/squares to show in the ui grid
     private TilePane numberPane;
 
-    public GridView() {
+    private SudokuModel model;
+
+    public GridView(SudokuModel model) {
         numberTiles = new Label[GRID_SIZE][GRID_SIZE];
         initNumberTiles();
         // ...
         numberPane = makeNumberPane();
         // ...
+        this.model=model;
     }
 
     public TilePane getPane(){
@@ -30,6 +34,7 @@ public class GridView {
 
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
+                //TODO: lägg till nummer här mha model.getNr()
                 Label tile = new Label(/* add number, or "", to display */); // data from model
                 tile.setPrefWidth(32);
                 tile.setPrefHeight(32);

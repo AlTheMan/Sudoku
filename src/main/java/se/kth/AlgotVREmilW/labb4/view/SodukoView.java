@@ -12,15 +12,18 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.VBox;
+import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
 import se.kth.AlgotVREmilW.labb4.view.GridView;
 
 public class SodukoView extends BorderPane {
 
     private GridView gridView;
+    private SudokuModel model;
 
-    public SodukoView(){
+    public SodukoView(SudokuModel model){
         super();
-        GridView gridView = new GridView();
+        this.model = model;
+        GridView gridView = new GridView(model);
         gridView.getPane().setMinSize(295,295);
         //gridView.getPane().setHgap(5);
         //gridView.getPane().setVgap(1);
