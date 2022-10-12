@@ -5,7 +5,7 @@ import java.util.Arrays;
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 public class SudokuModel {
     private int[][][] game;
-    private int[][] gameCopy;
+    private int[][] gameCopy;  //contains a copy of the initial state of the game
 
     public SudokuModel(SudokuLevel sudokuLevel) {
         this.game = generateSudokuMatrix(sudokuLevel);
@@ -56,7 +56,7 @@ public class SudokuModel {
     public boolean checkIfGameIsSolved(){
         for(int i=0; i<GRID_SIZE; i++){
             for(int j=0; j<GRID_SIZE; j++){
-                if(game[i][j][0] != game[i][j][1]) return false;
+                if(game[i][j][0] != game[i][j][1]) return false;  //man kan också bara kolla om game[i][j][0]!=0, eftersom varje input ska vara laglig
             }
         }
         return true;
