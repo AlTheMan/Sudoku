@@ -14,6 +14,10 @@ public class SudokuModel {
         makeGameCopy();
     }
 
+    public int getNr(int x, int y){
+        return game[x][y][0];
+    }
+
 //    for(int i =0; i<GRID_SIZE; i++){
 //        for(int j=0; j<GRID_SIZE; j++){
 //        }
@@ -54,6 +58,28 @@ public class SudokuModel {
             if (game[x][i][0] == inputNr) return false;
         }
         return true;
+    }
+
+    /**
+     * Sets a random number on the game and returns an array to identify the number
+     *
+     * @return an array with 1st element being the x-value, 2nd element y-value, and 3rd element the number in that position.
+     */
+    public int[]getHint(){
+        Random random = new Random();
+        int[] hintNr= new int[3];
+        if(checkIfGameIsSolved()) return hintNr;   //för att förhindra att spelet krashar ifall man trycker på "hint" knappen när spelet är löst.
+
+        while(true){
+            int nr1= random.nextInt(9)+1;
+            int nr2= random.nextInt(9)+1;
+            if(game[nr1][nr2][0]!=game[nr1][nr2][1]){
+                hintNr[0] = nr1;                    //x-värdet
+                hintNr[1] = nr2;                    //y-värdet
+                hintNr[2] = game[nr1][nr2][1];      //vilken siffra på positionen
+                return hintNr;
+            }
+        }
     }
 
     public boolean checkIfGameIsSolved(){
@@ -110,6 +136,7 @@ public class SudokuModel {
                 }
             }
         }
+        makeGameCopy();
     }
 
 
