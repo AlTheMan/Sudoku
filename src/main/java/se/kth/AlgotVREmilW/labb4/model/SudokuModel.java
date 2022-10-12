@@ -1,6 +1,5 @@
 package se.kth.AlgotVREmilW.labb4.model;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;

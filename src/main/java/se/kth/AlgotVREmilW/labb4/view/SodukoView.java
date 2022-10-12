@@ -3,7 +3,6 @@ package se.kth.AlgotVREmilW.labb4.view;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -13,7 +12,6 @@ import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.VBox;
 import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
-import se.kth.AlgotVREmilW.labb4.view.GridView;
 
 public class SodukoView extends BorderPane {
 
@@ -57,16 +55,11 @@ public class SodukoView extends BorderPane {
 
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(fileMenu, gameMenu, helpMenu);
-        menuBar.setMinWidth(408);  //TODO: gör detta smartare
 
-        GridPane topPane= new GridPane();
-        topPane.getChildren().add(menuBar);
-
-        topPane.setPadding(new Insets(0,0 , 10, 0));
-
-        this.setTop(topPane);
-
-
+        VBox vBoxMenu = new VBox();
+        vBoxMenu.getChildren().add(menuBar);
+        vBoxMenu.setPadding(new Insets(0,0 , 10, 0));
+        this.setTop(vBoxMenu);
 
         //left panel:
         GridPane leftGrid = new GridPane();
@@ -79,8 +72,8 @@ public class SodukoView extends BorderPane {
         leftGrid.setPadding(new Insets(10, 10, 10, 10));
         leftGrid.setAlignment(Pos.CENTER);
 
-        leftGrid.setHalignment(hintButton, HPos.CENTER); // To align horizontally in the cell
-        leftGrid.setHalignment(checkButton, HPos.CENTER); // To align horizontally in the cell
+        GridPane.setHalignment(hintButton, HPos.CENTER); // To align horizontally in the cell
+        GridPane.setHalignment(checkButton, HPos.CENTER); // To align horizontally in the cell
 
         this.setLeft(leftGrid);
 

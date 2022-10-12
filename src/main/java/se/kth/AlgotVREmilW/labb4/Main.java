@@ -2,15 +2,10 @@ package se.kth.AlgotVREmilW.labb4;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
+
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
-import se.kth.AlgotVREmilW.labb4.model.SudokuUtilities;
-import se.kth.AlgotVREmilW.labb4.view.GridView;
 import se.kth.AlgotVREmilW.labb4.view.SodukoView;
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 
