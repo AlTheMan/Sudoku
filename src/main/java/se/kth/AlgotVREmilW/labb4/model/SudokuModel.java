@@ -110,11 +110,11 @@ public class SudokuModel {
      */
     public void randomizeGameBoard() { //TODO: make private and maybe reverse the array?
         Random rand = new Random();
-        int rand1 = rand.nextInt(9) + 1;
+        int rand1 = rand.nextInt(GRID_SIZE) + 1;
         int rand2 = rand1;
 
-        while(rand2 == rand1){
-            rand2 = rand.nextInt(9) + 1;
+        while(rand2 == rand1){      // Makes sure the numbers aren't the same
+            rand2 = rand.nextInt(GRID_SIZE) + 1;
         }
 
         System.out.println("Random nr 1 = " + rand1);           //TODO: Ta bort sen
@@ -136,7 +136,26 @@ public class SudokuModel {
                 }
             }
         }
+        reverseArray();
         makeGameCopy();
+    }
+
+    public void reverseArray() {
+        int[] tmpUnsolved = new int[9];
+        int[] tmpSolved = new int[9];
+
+        for (int j = 0; j < GRID_SIZE; j++) {
+            int size = 0;
+            for (int i = GRID_SIZE - 1; i >= 0; i--) {
+                tmpUnsolved[size] = game[i][j][0];
+                tmpSolved[size] = game[i][j][1];
+                size++;
+            }
+            for (int i = 0; i < GRID_SIZE; i++) {
+                game[i][j][0] = tmpUnsolved[i];
+                game[i][j][1] = tmpSolved[i];
+            }
+        }
     }
 
 
