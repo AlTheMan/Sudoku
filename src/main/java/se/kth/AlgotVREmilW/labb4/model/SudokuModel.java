@@ -1,6 +1,7 @@
 package se.kth.AlgotVREmilW.labb4.model;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 public class SudokuModel {
@@ -77,6 +78,36 @@ public class SudokuModel {
     //TODO: göra psuedorandom generering för spelplanen
     // updatera oxå gameCopy
 
+    public void randomizeGameBoard() {
+        Random rand = new Random();
+        int rand1 = rand.nextInt(9) + 1;
+        int rand2 = rand1;
+
+        while(rand2 == rand1){
+            rand2 = rand.nextInt(9) + 1;
+        }
+
+        System.out.println("Random nr 1 = " + rand1);           //TODO: Ta bort sen
+        System.out.println("Random nr 2 = "+ rand2 + "\n");
+
+        for (int i = 0; i < GRID_SIZE; i++){
+            for (int j = 0; j < GRID_SIZE; j++) {
+                if (game[i][j][1] == rand1) {
+                    game[i][j][1] = rand2;
+                    if(game[i][j][0] != 0) {
+                        game[i][j][0] = rand2;
+                    }
+                }
+                else if(game[i][j][1] == rand2) {
+                    game[i][j][1] = rand1;
+                    if(game[i][j][0] != 0) {
+                        game[i][j][0] = rand1;
+                    }
+                }
+            }
+        }
+    }
+
 
     @Override
     public String toString() {
@@ -89,6 +120,17 @@ public class SudokuModel {
             }
             info+="\n";
         }
+
+        info += "\n";
+
+        for(int i =0; i<GRID_SIZE; i++){
+            for(int j=0; j<GRID_SIZE; j++){
+                info+= String.valueOf(game[i][j][1]);
+                info+= " ";
+            }
+            info+="\n";
+        }
+
         return info;
     }
 }

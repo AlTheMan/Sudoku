@@ -16,5 +16,8 @@ public class TestMain {
         sudokuModel.updateGame(8,8,7);
         System.out.println(sudokuModel);
 
+        sudokuModel.randomizeGameBoard();
+        System.out.println(sudokuModel);
+
     }
 }
