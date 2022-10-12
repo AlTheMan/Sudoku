@@ -56,12 +56,12 @@ public class SodukoView extends BorderPane {
         menuBar.getMenus().addAll(fileMenu, gameMenu, helpMenu);
         menuBar.setMinWidth(408);  //TODO: gör detta smartare
 
-        GridPane gridPane2= new GridPane();
-        gridPane2.getChildren().add(menuBar);
+        GridPane topPane= new GridPane();
+        topPane.getChildren().add(menuBar);
 
-        gridPane2.setPadding(new Insets(0,0 , 10, 0));
+        topPane.setPadding(new Insets(0,0 , 10, 0));
 
-        this.setTop(gridPane2);
+        this.setTop(topPane);
 
 
 
