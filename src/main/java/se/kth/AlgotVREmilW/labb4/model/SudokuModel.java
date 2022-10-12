@@ -25,14 +25,14 @@ public class SudokuModel {
             }
         }
     }
-    private boolean checkIfStartNr(int x, int y, int inputNr){
-        if (gameCopy[x][y]!=inputNr) return false;
+    private boolean checkIfStartNrExistAtPosition(int x, int y){
+        if (gameCopy[x][y]!=0) return false;
         return true;
     }
 
     public void updateGame(int x, int y, int inputNr ){
         if(inputNr==0) {
-            if( !checkIfStartNr(x, y, inputNr)){
+            if( !checkIfStartNrExistAtPosition(x, y)){
                 System.out.println("You tried to change a startNr");
                 return; //TODO: illegal move
             }
