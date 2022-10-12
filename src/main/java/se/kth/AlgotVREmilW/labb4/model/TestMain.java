@@ -6,17 +6,7 @@ public class TestMain {
         SudokuModel sudokuModel = new SudokuModel(SudokuLevel.EASY);
         System.out.println(sudokuModel);
 
-        sudokuModel.updateGame(0,0,5);
-        System.out.println(sudokuModel);
-
-        System.out.println(sudokuModel.checkLegalMove(0,1,5));
-        sudokuModel.updateGame(0,1,5);
-        System.out.println(sudokuModel);
-
-        sudokuModel.updateGame(8,8,7);
-        System.out.println(sudokuModel);
-
-        sudokuModel.randomizeGameBoard();
+        sudokuModel.reverseArray();
         System.out.println(sudokuModel);
 
     }
