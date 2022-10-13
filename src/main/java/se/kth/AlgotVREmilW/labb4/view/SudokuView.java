@@ -1,5 +1,7 @@
 package se.kth.AlgotVREmilW.labb4.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,14 +15,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
 
-public class SodukoView extends BorderPane {
+public class SudokuView extends BorderPane {
 
     private GridView gridView;
     private SudokuModel model;
+    Button[] numberButton;
+    Button clearButton;
+    Button hintButton;
+    Button checkButton;
 
-    public SodukoView(SudokuModel model){
+    public SudokuView(SudokuModel model){
         super();
         this.model = model;
+
+        SudokuController controller = new SudokuController(this, model);
+
         GridView gridView = new GridView(model);
         gridView.getPane().setMinSize(295,295);
         //gridView.getPane().setHgap(5);
@@ -63,8 +72,8 @@ public class SodukoView extends BorderPane {
 
         //left panel:
         GridPane leftGrid = new GridPane();
-        Button checkButton = new Button("Check");
-        Button hintButton = new Button("Hint");
+        checkButton = new Button("Check");
+        hintButton = new Button("Hint");
         leftGrid.add(checkButton, 0,0);
         leftGrid.add(hintButton,0,1);
         leftGrid.setHgap(10);
@@ -78,12 +87,10 @@ public class SodukoView extends BorderPane {
         this.setLeft(leftGrid);
 
 
-
-
         //right panel
         GridPane rightPane =  new GridPane();
-        Button[] numberButton = new Button[9];
-        Button clearButton = new Button("C");
+        numberButton = new Button[9];
+        clearButton = new Button("C");
 
         for(int i =0; i<9; i++){
             int nr = i+1;
@@ -108,8 +115,54 @@ public class SodukoView extends BorderPane {
         GridPane bottomPane = new GridPane();
         bottomPane.setPadding(new Insets(0, 0, 15, 0));
         this.setBottom(bottomPane);
+        addEventHandlers(controller);
+    }
+
+    private void addEventHandlers(SudokuController controller) {
+        addNumberButtons(controller);
+
+        EventHandler<ActionEvent> clearButtonHandler = actionEvent -> controller.handleClearButton();
+        clearButton.addEventHandler(ActionEvent.ACTION, clearButtonHandler);
+        EventHandler<ActionEvent> hintButtonHandler = actionEvent -> controller.handleHintButton();
+        hintButton.addEventHandler(ActionEvent.ACTION, hintButtonHandler);
+        EventHandler<ActionEvent> checkButtonHandler = actionEvent -> controller.handleCheckButton();
+        checkButton.addEventHandler(ActionEvent.ACTION, checkButtonHandler);
+
+
+
 
 
     }
+
+    private void addNumberButtons(SudokuController controller) {
+        EventHandler<ActionEvent> buttonOneHandler = actionEvent -> controller.handleOneButton();
+        numberButton[0].addEventHandler(ActionEvent.ACTION, buttonOneHandler);
+
+        EventHandler<ActionEvent> buttonTwoHandler = actionEvent -> controller.handleTwoButton();
+        numberButton[1].addEventHandler(ActionEvent.ACTION, buttonTwoHandler);
+
+        EventHandler<ActionEvent> buttonThreeHandler = actionEvent -> controller.handleThreeButton();
+        numberButton[2].addEventHandler(ActionEvent.ACTION, buttonThreeHandler);
+
+        EventHandler<ActionEvent> buttonFourHandler = actionEvent -> controller.handleFourButton();
+        numberButton[3].addEventHandler(ActionEvent.ACTION, buttonFourHandler);
+
+        EventHandler<ActionEvent> buttonFiveHandler = actionEvent -> controller.handleFiveButton();
+        numberButton[4].addEventHandler(ActionEvent.ACTION, buttonFiveHandler);
+
+        EventHandler<ActionEvent> buttonSixHandler = actionEvent -> controller.handleSixButton();
+        numberButton[5].addEventHandler(ActionEvent.ACTION, buttonSixHandler);
+
+        EventHandler<ActionEvent> buttonSevenHandler = actionEvent -> controller.handleSevenButton();
+        numberButton[6].addEventHandler(ActionEvent.ACTION, buttonSevenHandler);
+
+        EventHandler<ActionEvent> buttonEightHandler = actionEvent -> controller.handleEightButton();
+        numberButton[7].addEventHandler(ActionEvent.ACTION, buttonEightHandler);
+
+        EventHandler<ActionEvent> buttonNineHandler = actionEvent -> controller.handleNineButton();
+        numberButton[8].addEventHandler(ActionEvent.ACTION, buttonNineHandler);
+    }
+
+
 
 }

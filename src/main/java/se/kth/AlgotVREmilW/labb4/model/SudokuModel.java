@@ -13,6 +13,10 @@ public class SudokuModel {
         makeGameCopy();
     }
 
+    public String getStartPositions(int x, int y){
+        return String.valueOf(gameCopy[x][y]);
+    }
+
     public int getNr(int x, int y){
         return game[x][y][0];
     }

@@ -16,12 +16,10 @@ public class GridView {
     private SudokuModel model;
 
     public GridView(SudokuModel model) {
+        this.model = model;
         numberTiles = new Label[GRID_SIZE][GRID_SIZE];
         initNumberTiles();
-        // ...
         numberPane = makeNumberPane();
-        // ...
-        this.model=model;
     }
 
     public TilePane getPane(){
@@ -35,7 +33,7 @@ public class GridView {
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
                 //TODO: lägg till nummer här mha model.getNr()
-                Label tile = new Label(/* add number, or "", to display */); // data from model
+                Label tile = new Label(model.getStartPositions(row, col)); // data from model
                 tile.setPrefWidth(32);
                 tile.setPrefHeight(32);
                 tile.setFont(font);
