@@ -23,6 +23,7 @@ public class SudokuView extends BorderPane {
     Button clearButton;
     Button hintButton;
     Button checkButton;
+    MenuItem clearItem;
 
     public SudokuView(SudokuModel model){
         super();
@@ -57,10 +58,11 @@ public class SudokuView extends BorderPane {
         gameMenu.getItems().addAll(newItem, easyItem, mediumItem, hardItem);
 
         Menu helpMenu = new Menu("Help");
-        MenuItem clearItem = new MenuItem("Clear game");
+        clearItem = new MenuItem("Clear game");
         MenuItem checkItem = new MenuItem("Check if numbers are correct");
         MenuItem rulesItem = new MenuItem("rules");
         helpMenu.getItems().addAll(clearItem,checkItem,rulesItem);
+
 
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(fileMenu, gameMenu, helpMenu);
@@ -123,6 +125,7 @@ public class SudokuView extends BorderPane {
 
         EventHandler<ActionEvent> clearButtonHandler = actionEvent -> controller.handleClearButton();
         clearButton.addEventHandler(ActionEvent.ACTION, clearButtonHandler);
+        clearItem.addEventHandler(ActionEvent.ACTION, clearButtonHandler);
         EventHandler<ActionEvent> hintButtonHandler = actionEvent -> controller.handleHintButton();
         hintButton.addEventHandler(ActionEvent.ACTION, hintButtonHandler);
         EventHandler<ActionEvent> checkButtonHandler = actionEvent -> controller.handleCheckButton();
