@@ -5,15 +5,15 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.VBox;
 import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
+
+import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.GRID_SIZE;
 
 public class SudokuView extends BorderPane {
 
@@ -24,6 +24,7 @@ public class SudokuView extends BorderPane {
     Button hintButton;
     Button checkButton;
     MenuItem clearItem;
+    GridPane rightPane;
 
     public SudokuView(SudokuModel model){
         super();
@@ -90,7 +91,7 @@ public class SudokuView extends BorderPane {
 
 
         //right panel
-        GridPane rightPane =  new GridPane();
+        rightPane =  new GridPane();
         numberButton = new Button[9];
         clearButton = new Button("C");
 
@@ -120,6 +121,11 @@ public class SudokuView extends BorderPane {
         addEventHandlers(controller);
     }
 
+    public void setGridTile(int row, int col, Label label){
+        gridView.setNumberOnTile(row, col, label);
+    }
+
+
     private void addEventHandlers(SudokuController controller) {
         addNumberButtons(controller);
 
@@ -130,6 +136,23 @@ public class SudokuView extends BorderPane {
         hintButton.addEventHandler(ActionEvent.ACTION, hintButtonHandler);
         EventHandler<ActionEvent> checkButtonHandler = actionEvent -> controller.handleCheckButton();
         checkButton.addEventHandler(ActionEvent.ACTION, checkButtonHandler);
+
+        EventHandler<MouseEvent> tileCLickHandler = new EventHandler<MouseEvent>() {
+
+            Label[][] numberTiles = gridView.getNumberTiles();
+            @Override
+            public void handle(MouseEvent event) {
+                for(int row = 0; row < GRID_SIZE; row++) {
+                    for(int col = 0; col < GRID_SIZE; col++) {
+                        if(event.getSource() == numberTiles[row][col]) {
+                            controller.handleCenterClick(row, col);
+                            return;
+                        }
+                    }
+                }
+            }
+        };
+
 
 
 

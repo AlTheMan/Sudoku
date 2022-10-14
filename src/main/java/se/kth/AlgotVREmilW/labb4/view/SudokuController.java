@@ -1,11 +1,14 @@
 package se.kth.AlgotVREmilW.labb4.view;
 
+import javafx.scene.control.Label;
 import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
 
 public class SudokuController {
 
     SudokuView view;
     SudokuModel model;
+    String number;
+
 
     public SudokuController(SudokuView view, SudokuModel model) {
         this.view = view;
@@ -26,6 +29,8 @@ public class SudokuController {
     }
 
     public void handleOneButton(){
+        this.number = "1";
+
         System.out.println("Button 1");
     }
     public void handleTwoButton(){
@@ -52,6 +57,14 @@ public class SudokuController {
     public void handleNineButton(){
         System.out.println("Button 9");
     }
+
+    public void handleCenterClick(int row, int col) {
+        Label label = new Label(number);
+        view.setGridTile(row, col, label);
+
+    }
+
+
 
 
 

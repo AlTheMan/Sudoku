@@ -14,7 +14,9 @@ public class SudokuModel {
     }
 
     public String getStartPositions(int x, int y){
-        return String.valueOf(gameCopy[x][y]);
+        String number = String.valueOf(gameCopy[x][y]);
+        if (number.equals("0")) return "";
+        return number;
     }
 
     public int getNr(int x, int y){

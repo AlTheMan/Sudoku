@@ -79,4 +79,13 @@ public class GridView {
         }
         return root;
     }
+
+    public Label[][] getNumberTiles() {
+        return numberTiles;
+    }
+
+    public void setNumberOnTile(int row, int col, Label number){
+        numberTiles[row][col] = number;
+
+    }
 }
