@@ -61,6 +61,21 @@ public class SudokuModel {
             if (game[i][y][0] == inputNr) return false;
             if (game[x][i][0] == inputNr) return false;
         }
+        if(gameCopy[x][y]!=0) return false;         //så att man inte kan placera på startvärden
+
+        //kollar om det finns samma siffra i samma ruta:
+        //om man har position [8][0], så blir mod3 av 8 = 2.
+        //då räknar man 8-2 för att få startindex, alltså
+        // börjar man leta på index [6][0] och letar fram 3 rutor i vardera håll.
+        int modX= x%3;
+        int modY= y%3;
+        for(int i=0; i<SECTION_SIZE; i++){
+            for(int j=0; j<SECTION_SIZE; j++){
+                if(game[x-modX+i][y-modY+j][0]== inputNr) return false;
+                if(game[x-modX+j][y-modY+i][0]== inputNr) return false;
+            }
+        }
+
         return true;
     }
 
