@@ -23,6 +23,10 @@ public class SudokuModel {
         return game[x][y][0];
     }
 
+    public int getGameCopyNr(int x, int y) {
+        return gameCopy[x][y];
+    }
+
 //    for(int i =0; i<GRID_SIZE; i++){
 //        for(int j=0; j<GRID_SIZE; j++){
 //        }
@@ -120,6 +124,18 @@ public class SudokuModel {
             }
         }
     }
+
+    public boolean checkIfNoMistakes(){
+        for (int i = 0; i < GRID_SIZE; i++){
+            for (int j = 0; j < GRID_SIZE; j++){
+                if(game[i][j][0] != 0){
+                    if(game[i][j][0] != game[i][j][1]) return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     //TODO: göra psuedorandom generering för spelplanen
     // updatera oxå gameCopy
