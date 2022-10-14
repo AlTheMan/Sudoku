@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
 
@@ -137,7 +138,7 @@ public class SudokuView extends BorderPane {
     }
     // called by constructor (only)
     private final void initNumberTiles() {
-        Font font = Font.font("Monospaced", FontWeight.NORMAL, 20);
+        Font font = Font.font("Monospaced", FontWeight.BOLD, 20);
 
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
@@ -200,7 +201,12 @@ public class SudokuView extends BorderPane {
     }
 
     public void setNumberOnTile(int row, int col, String number){
+
         numberTiles[row][col].setText(number);
+        //numberTiles[row][col].setFont(Font.font("verdana", FontWeight.BLACK, FontPosture.REGULAR, 20));
+        numberTiles[row][col].setStyle("-fx-border-color: black; -fx-text-fill: grey; -fx-border-width: 0.5px;"); // css style
+        Font font = Font.font("Monospaced", FontWeight.LIGHT, 20);
+
 
     }
 

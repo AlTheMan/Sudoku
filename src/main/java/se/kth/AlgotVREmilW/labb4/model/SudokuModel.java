@@ -13,9 +13,10 @@ public class SudokuModel {
         makeGameCopy();
     }
 
+    //TODO: ändra namn. inte längre start position
     public String getNrFromStartPositions(int x, int y){
-        if(String.valueOf(gameCopy[x][y]).equals("0")) return "";
-        return String.valueOf(gameCopy[x][y]);
+        if(String.valueOf(game[x][y][0]).equals("0")) return "";
+        return String.valueOf(game[x][y][0]);
     }
 
     public int getNr(int x, int y){
