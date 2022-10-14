@@ -27,50 +27,63 @@ public class SudokuController {
         System.out.println("Clear");
     }
 
-    public void handleOneButton(){
-        this.number=1;
+    public void handleOneButton() {
+        this.number = 1;
         System.out.println("Button 1");
     }
-    public void handleTwoButton(){
+
+    public void handleTwoButton() {
+        this.number = 2;
         System.out.println("Button 2");
     }
-    public void handleThreeButton(){
+
+    public void handleThreeButton() {
+        this.number = 3;
         System.out.println("Button 3");
     }
-    public void handleFourButton(){
+
+    public void handleFourButton() {
+        this.number = 4;
         System.out.println("Button 4");
     }
-    public void handleFiveButton(){
+
+    public void handleFiveButton() {
+        this.number = 5;
         System.out.println("Button 5");
     }
-    public void handleSixButton(){
+
+    public void handleSixButton() {
+        this.number = 6;
         System.out.println("Button 6");
     }
-    public void handleSevenButton(){
+
+    public void handleSevenButton() {
+        this.number = 7;
         System.out.println("Button 7");
     }
-    public void handleEightButton(){
+
+    public void handleEightButton() {
+        this.number = 8;
         System.out.println("Button 8");
     }
-    public void handleNineButton(){
+
+    public void handleNineButton() {
+        this.number = 9;
         System.out.println("Button 9");
     }
 
-    public void handleCenterClick(int row, int col){
+    public void handleCenterClick(int row, int col) {
 
-        if(model.checkLegalMove(row,col,number)){
-            model.updateGame(row, col,number);
-            view.setNumberOnTile(row,col,new Label(String.valueOf(number)));
+        if (model.checkLegalMove(row, col, number)) {
+            model.updateGame(row, col, number);
+            view.setNumberOnTile(row, col, String.valueOf(number));
             System.out.println("Success");
-        }
-        else{
+        } else {
             System.out.println("Can't place here");
         }
         //TODO: else show alert, elr do nothing
 
     }
-
-
 
 
 }

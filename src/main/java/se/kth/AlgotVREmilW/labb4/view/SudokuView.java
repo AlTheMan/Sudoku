@@ -199,8 +199,8 @@ public class SudokuView extends BorderPane {
         return numberTiles;
     }
 
-    public void setNumberOnTile(int row, int col, Label number){
-        numberTiles[row][col] = number;
+    public void setNumberOnTile(int row, int col, String number){
+        numberTiles[row][col].setText(number);
 
     }
 
