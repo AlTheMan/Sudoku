@@ -1,8 +1,10 @@
 package se.kth.AlgotVREmilW.labb4.view;
 
+import javafx.scene.control.Label;
 import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
 
 public class SudokuController {
+    private Label number;
 
     SudokuView view;
     SudokuModel model;
@@ -26,6 +28,7 @@ public class SudokuController {
     }
 
     public void handleOneButton(){
+        this.number= new Label("1");
         System.out.println("Button 1");
     }
     public void handleTwoButton(){
@@ -53,6 +56,10 @@ public class SudokuController {
         System.out.println("Button 9");
     }
 
+    public void handleCenterClick(int row, int col){
+        view.setNumberOnTile(row,col,number);
+
+    }
 
 
 
