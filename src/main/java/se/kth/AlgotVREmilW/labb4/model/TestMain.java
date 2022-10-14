@@ -6,8 +6,5 @@ public class TestMain {
         SudokuModel sudokuModel = new SudokuModel(SudokuLevel.EASY);
         System.out.println(sudokuModel);
 
-        sudokuModel.reverseArray();
-        System.out.println(sudokuModel);
-
     }
 }

@@ -27,9 +27,10 @@ public class SudokuController {
 
     public void handleHintButton() {
         int[] addHint = model.getHint();
+        System.out.println("Hint gotten: x = " + (addHint[1] + 1) + ", y = " + (addHint[0] + 1) + ", Sudoku: " + addHint[2]); //TODO: Ta bort
         if(model.updateGame(addHint[0], addHint[1], addHint[2])){
             view.setNumberOnTile(addHint[0], addHint[1], String.valueOf(addHint[2]));
-            System.out.println("Hint gotten: x = " + (addHint[1] + 1) + ", y = " + (addHint[0] + 1) + ", Sudoku: " + addHint[2]); //TODO: Ta bort
+            System.out.println("Hint added: x = " + (addHint[1] + 1) + ", y = " + (addHint[0] + 1) + ", Sudoku: " + addHint[2]); //TODO: Ta bort
         }
     }
 
