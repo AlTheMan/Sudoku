@@ -89,14 +89,14 @@ public class SudokuModel {
      *
      * @return an array with 1st element being the x-value, 2nd element y-value, and 3rd element the number in that position.
      */
-    public int[]getHint(){
+    public int[] getHint(){
         Random random = new Random();
-        int[] hintNr= new int[3];
+        int[] hintNr = new int[3];
         if(checkIfGameIsSolved()) return hintNr;   //för att förhindra att spelet krashar ifall man trycker på "hint" knappen när spelet är löst.
 
         while(true){
-            int nr1= random.nextInt(9)+1;
-            int nr2= random.nextInt(9)+1;
+            int nr1= random.nextInt(9);
+            int nr2= random.nextInt(9);
             if(game[nr1][nr2][0]!=game[nr1][nr2][1]){
                 hintNr[0] = nr1;                    //x-värdet
                 hintNr[1] = nr2;                    //y-värdet
@@ -104,6 +104,7 @@ public class SudokuModel {
                 return hintNr;
             }
         }
+
     }
 
     public boolean checkIfGameIsSolved(){
