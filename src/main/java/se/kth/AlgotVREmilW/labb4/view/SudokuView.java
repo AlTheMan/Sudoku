@@ -41,7 +41,6 @@ public class SudokuView extends BorderPane {
         addBottomPane();
         addEventHandlers(controller);
     }
-
     private void initAndAddgrid(){
         numberTiles = new Label[GRID_SIZE][GRID_SIZE];
         initNumberTiles();
@@ -49,7 +48,6 @@ public class SudokuView extends BorderPane {
         gridView.setMinSize(295,295);
         this.setCenter(gridView);
     }
-
     private void addMenu(){
         // menu compontents
         Menu fileMenu = new Menu("File");
@@ -81,7 +79,6 @@ public class SudokuView extends BorderPane {
         vBoxMenu.setPadding(new Insets(0,0 , 10, 0));
         this.setTop(vBoxMenu);
     }
-
     private void addLeftPane(){
         GridPane leftGrid = new GridPane();
         checkButton = new Button("Check");
@@ -122,7 +119,6 @@ public class SudokuView extends BorderPane {
 
         this.setRight(rightPane);
     }
-
     private void addBottomPane(){
         GridPane bottomPane = new GridPane();
         bottomPane.setPadding(new Insets(0, 0, 15, 0));
@@ -135,13 +131,10 @@ public class SudokuView extends BorderPane {
 
 
 
-    //grid view --------------------
-
-
+    //------------grid view --------------------
     public TilePane getPane(){
         return numberPane;
     }
-
     // called by constructor (only)
     private final void initNumberTiles() {
         Font font = Font.font("Monospaced", FontWeight.NORMAL, 20);
@@ -209,7 +202,6 @@ public class SudokuView extends BorderPane {
     public void setNumberOnTile(int row, int col, Label number){
         numberTiles[row][col] = number;
 
-
     }
 
 
@@ -225,8 +217,7 @@ public class SudokuView extends BorderPane {
 
 
 
-//event handlers-----------------
-
+//----------------event handlers-----------------
     private void addEventHandlers(SudokuController controller) {
         addNumberButtons(controller);
 
@@ -290,7 +281,4 @@ public class SudokuView extends BorderPane {
         EventHandler<ActionEvent> buttonNineHandler = actionEvent -> controller.handleNineButton();
         numberButton[8].addEventHandler(ActionEvent.ACTION, buttonNineHandler);
     }
-
-
-
 }
