@@ -4,7 +4,7 @@ import javafx.scene.control.Label;
 import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
 
 public class SudokuController {
-    private Label number;
+    private int number;
 
     SudokuView view;
     SudokuModel model;
@@ -28,7 +28,7 @@ public class SudokuController {
     }
 
     public void handleOneButton(){
-        this.number= new Label("1");
+        this.number=1;
         System.out.println("Button 1");
     }
     public void handleTwoButton(){
@@ -57,7 +57,16 @@ public class SudokuController {
     }
 
     public void handleCenterClick(int row, int col){
-        view.setNumberOnTile(row,col,number);
+
+        if(model.checkLegalMove(row,col,number)){
+            model.updateGame(row, col,number);
+            view.setNumberOnTile(row,col,new Label(String.valueOf(number)));
+            System.out.println("Success");
+        }
+        else{
+            System.out.println("Can't place here");
+        }
+        //TODO: else show alert, elr do nothing
 
     }
 

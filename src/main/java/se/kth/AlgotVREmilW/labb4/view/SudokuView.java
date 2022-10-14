@@ -33,28 +33,24 @@ public class SudokuView extends BorderPane {
     public SudokuView(SudokuModel model){
         super();
         this.model = model;
+        SudokuController controller = new SudokuController(this, model);
+        initAndAddgrid();
+        addMenu();
+        addLeftPane();
+        addRightPane();
+        addBottomPane();
+        addEventHandlers(controller);
+    }
 
-
-        //init gridview
-        //gridView = new TilePane();
+    private void initAndAddgrid(){
         numberTiles = new Label[GRID_SIZE][GRID_SIZE];
         initNumberTiles();
         gridView= makeNumberPane();
         gridView.setMinSize(295,295);
-
-
-
-        SudokuController controller = new SudokuController(this, model);
-
-        //gridView.getPane().setHgap(5);
-        //gridView.getPane().setVgap(1);
-        //gridView.getPane().setPadding(new Insets(10, 10, 10, 10));
-
-        //BorderPane borderPane = new BorderPane();
         this.setCenter(gridView);
-        //borderPane.setPrefSize( 300, 300);
+    }
 
-
+    private void addMenu(){
         // menu compontents
         Menu fileMenu = new Menu("File");
         MenuItem loadGameItem = new MenuItem("Load Game");
@@ -84,8 +80,9 @@ public class SudokuView extends BorderPane {
         vBoxMenu.getChildren().add(menuBar);
         vBoxMenu.setPadding(new Insets(0,0 , 10, 0));
         this.setTop(vBoxMenu);
+    }
 
-        //left panel:
+    private void addLeftPane(){
         GridPane leftGrid = new GridPane();
         checkButton = new Button("Check");
         hintButton = new Button("Hint");
@@ -101,8 +98,8 @@ public class SudokuView extends BorderPane {
 
         this.setLeft(leftGrid);
 
-
-        //right panel
+    }
+    private void addRightPane(){
         GridPane rightPane =  new GridPane();
         numberButton = new Button[9];
         clearButton = new Button("C");
@@ -124,13 +121,12 @@ public class SudokuView extends BorderPane {
         rightPane.setAlignment(Pos.CENTER);
 
         this.setRight(rightPane);
+    }
 
-
-        //bottom pane:
+    private void addBottomPane(){
         GridPane bottomPane = new GridPane();
         bottomPane.setPadding(new Insets(0, 0, 15, 0));
         this.setBottom(bottomPane);
-        addEventHandlers(controller);
     }
 
 
@@ -155,7 +151,7 @@ public class SudokuView extends BorderPane {
                 //TODO: lägg till nummer här mha model.getNr()
 
                 //TODO: ändra från startPositionen
-                Label tile = new Label(model.getStartPositions(row, col)); // data from model
+                Label tile = new Label(model.getNrFromStartPositions(row, col)); // data from model
                 tile.setPrefWidth(32);
                 tile.setPrefHeight(32);
                 tile.setFont(font);
