@@ -22,6 +22,10 @@ public class SudokuModel {
         return game[x][y][0];
     }
 
+    public int getGameCopyNr(int x, int y) {
+        return gameCopy[x][y];
+    }
+
 //    for(int i =0; i<GRID_SIZE; i++){
 //        for(int j=0; j<GRID_SIZE; j++){
 //        }

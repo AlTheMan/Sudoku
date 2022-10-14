@@ -24,6 +24,7 @@ public class SudokuController {
 
 
     public void handleClearButton() {
+        this.number = 0;
         System.out.println("Clear");
     }
 
@@ -78,7 +79,14 @@ public class SudokuController {
             model.updateGame(row, col, number);
             view.setNumberOnTile(row, col, String.valueOf(number));
             System.out.println("Success");
-        } else {
+        }
+        else if (this.number == 0) {
+            if (model.getGameCopyNr(row, col) == 0){
+                model.updateGame(row, col, number);
+                view.setNumberOnTile(row, col, "");
+            }
+        }
+        else {
             System.out.println("Can't place here");
         }
         //TODO: else show alert, elr do nothing
