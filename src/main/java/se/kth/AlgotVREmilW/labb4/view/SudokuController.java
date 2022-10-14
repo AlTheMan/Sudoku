@@ -3,6 +3,8 @@ package se.kth.AlgotVREmilW.labb4.view;
 import javafx.scene.control.Label;
 import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
 
+import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.GRID_SIZE;
+
 public class SudokuController {
     private int number;
 
@@ -35,7 +37,18 @@ public class SudokuController {
     }
 
     public void handleClearItem() {
+        model.clearGame();
+        for(int x=0; x<GRID_SIZE; x++){
+            for(int y=0; y<GRID_SIZE; y++){
+                if(model.getNr(x,y)==0){
+                    view.setNumberOnTileOriginalFont(x, y, "");
+                }
+                else{
+                    view.setNumberOnTileOriginalFont(x, y, String.valueOf(model.getNr(x,y)));
+                }
 
+            }
+        }
     }
 
 
@@ -78,6 +91,7 @@ public class SudokuController {
     public void handleNineButton() {
         this.number = 9;
     }
+
 
     public void handleCenterClick(int row, int col) {
 

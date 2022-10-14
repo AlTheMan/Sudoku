@@ -202,12 +202,15 @@ public class SudokuView extends BorderPane {
     }
 
     public void setNumberOnTile(int row, int col, String number){
-
         numberTiles[row][col].setStyle("-fx-border-color: black; -fx-text-fill: grey; -fx-border-width: 0.5px;"); // css style
         numberTiles[row][col].setText(number);
-
-
     }
+
+    public void setNumberOnTileOriginalFont(int row, int col, String number){
+        numberTiles[row][col].setText(number);
+    }
+
+
 
 
 
@@ -234,6 +237,10 @@ public class SudokuView extends BorderPane {
 
         EventHandler<ActionEvent> clearButtonHandler = actionEvent -> controller.handleClearButton();
         clearButton.addEventHandler(ActionEvent.ACTION, clearButtonHandler);
+
+        EventHandler<ActionEvent> clearItemHandler = actionEvent -> controller.handleClearItem();
+        clearItem.addEventHandler(ActionEvent.ACTION, clearItemHandler);
+
         EventHandler<ActionEvent> hintButtonHandler = actionEvent -> controller.handleHintButton();
         hintButton.addEventHandler(ActionEvent.ACTION, hintButtonHandler);
         EventHandler<ActionEvent> checkButtonHandler = actionEvent -> controller.handleCheckButton();
@@ -264,7 +271,7 @@ public class SudokuView extends BorderPane {
 
     }
 
-    
+
 
     private void addNumberButtons(SudokuController controller) {
         EventHandler<ActionEvent> buttonOneHandler = actionEvent -> controller.handleOneButton();
