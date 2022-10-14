@@ -62,6 +62,11 @@ public class SudokuModel {
     }
 
     public boolean checkLegalMove(int x, int y, int inputNr ){
+        //TODO: kolla om inputNr==0 behövs kollas
+        if(inputNr==0){
+            if(gameCopy[x][y]!=0) return false;         //så att man inte kan placera på startvärden
+            return true;
+        }
         for(int i =0; i<GRID_SIZE; i++){
             if (game[i][y][0] == inputNr) return false;
             if (game[x][i][0] == inputNr) return false;
