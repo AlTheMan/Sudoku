@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
 
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.GRID_SIZE;
+import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.SECTION_SIZE;
 
 public class SudokuView extends BorderPane {
 
@@ -32,7 +33,7 @@ public class SudokuView extends BorderPane {
 
         SudokuController controller = new SudokuController(this, model);
 
-        GridView gridView = new GridView(model);
+        gridView = new GridView(model);
         gridView.getPane().setMinSize(295,295);
         //gridView.getPane().setHgap(5);
         //gridView.getPane().setVgap(1);
@@ -118,6 +119,8 @@ public class SudokuView extends BorderPane {
         GridPane bottomPane = new GridPane();
         bottomPane.setPadding(new Insets(0, 0, 15, 0));
         this.setBottom(bottomPane);
+
+
         addEventHandlers(controller);
     }
 
@@ -138,13 +141,13 @@ public class SudokuView extends BorderPane {
         checkButton.addEventHandler(ActionEvent.ACTION, checkButtonHandler);
 
         EventHandler<MouseEvent> tileCLickHandler = new EventHandler<MouseEvent>() {
-
-            Label[][] numberTiles = gridView.getNumberTiles();
             @Override
             public void handle(MouseEvent event) {
                 for(int row = 0; row < GRID_SIZE; row++) {
                     for(int col = 0; col < GRID_SIZE; col++) {
-                        if(event.getSource() == numberTiles[row][col]) {
+                        System.out.println(event.getSource());
+                        if(event.getSource() == gridView.getNumberTiles(row, col)) {
+                            System.out.println(gridView.getNumberTiles(row, col));
                             controller.handleCenterClick(row, col);
                             return;
                         }
@@ -152,10 +155,12 @@ public class SudokuView extends BorderPane {
                 }
             }
         };
-
-
-
-
+        Label[][] TilesArr = gridView.getNumberTilesArr();
+        for(int i =0; i<SECTION_SIZE; i++){
+            for(int j=0; j<SECTION_SIZE; j++){
+                TilesArr[i][j].addEventHandler(MouseEvent.MOUSE_CLICKED, tileCLickHandler);
+            }
+        }
 
 
     }

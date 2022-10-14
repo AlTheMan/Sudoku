@@ -26,6 +26,8 @@ public class GridView {
         return numberPane;
     }
 
+
+
     // called by constructor (only)
     private final void initNumberTiles() {
         Font font = Font.font("Monospaced", FontWeight.NORMAL, 20);
@@ -80,7 +82,11 @@ public class GridView {
         return root;
     }
 
-    public Label[][] getNumberTiles() {
+    public Label getNumberTiles(int row, int col) {
+        return numberTiles[row][col];
+    }
+
+    public Label[][] getNumberTilesArr(){
         return numberTiles;
     }
 

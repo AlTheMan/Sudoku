@@ -9,6 +9,7 @@ public class SudokuController {
     SudokuModel model;
     String number;
 
+    private Label label;
 
     public SudokuController(SudokuView view, SudokuModel model) {
         this.view = view;
@@ -59,8 +60,9 @@ public class SudokuController {
     }
 
     public void handleCenterClick(int row, int col) {
-        Label label = new Label(number);
-        view.setGridTile(row, col, label);
+        System.out.println("click");
+        //label = new Label(number);
+        //view.setGridTile(row, col, label);
 
     }
 
