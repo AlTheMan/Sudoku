@@ -46,19 +46,20 @@ public class SudokuModel {
         return true;
     }
 
-    public void updateGame(int x, int y, int inputNr ){
+    public boolean updateGame(int x, int y, int inputNr ){
         if(inputNr==0) {
-            if( !checkIfStartNrExistAtPosition(x, y)){
+            if(!checkIfStartNrExistAtPosition(x, y)){
                 System.out.println("You tried to change a startNr");
-                return; //TODO: illegal move
+                return false; //TODO: illegal move
             }
         }
         else if(!checkLegalMove(x,y,inputNr)) {
             System.out.println("Illegal move"); //deta måste ta bort
             //TODO: detta måste tas bort
-            return; //throws new Exception(); //ska kasta exception
+            return false; //throws new Exception(); //ska kasta exception
         }
         game[x][y][0]= inputNr;
+        return true;
     }
 
     public boolean checkLegalMove(int x, int y, int inputNr ){

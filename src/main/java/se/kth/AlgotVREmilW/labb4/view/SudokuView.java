@@ -203,10 +203,8 @@ public class SudokuView extends BorderPane {
 
     public void setNumberOnTile(int row, int col, String number){
 
+        //numberTiles[row][col].setStyle("-fx-border-color: black; -fx-text-fill: grey; -fx-border-width: 0.5px;"); // css style
         numberTiles[row][col].setText(number);
-        //numberTiles[row][col].setFont(Font.font("verdana", FontWeight.BLACK, FontPosture.REGULAR, 20));
-        numberTiles[row][col].setStyle("-fx-border-color: black; -fx-text-fill: grey; -fx-border-width: 0.5px;"); // css style
-        Font font = Font.font("Monospaced", FontWeight.LIGHT, 20);
 
 
     }
