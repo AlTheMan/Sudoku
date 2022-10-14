@@ -24,11 +24,12 @@ public class SudokuView extends BorderPane {
     private TilePane numberPane;
     private TilePane gridView;
     private SudokuModel model;
-    Button[] numberButton;
-    Button clearButton;
-    Button hintButton;
-    Button checkButton;
-    MenuItem clearItem;
+    private Button[] numberButton;
+    private Button clearButton;
+    private Button hintButton;
+    private Button checkButton;
+    private MenuItem clearItem;
+    private MenuItem checkItem;
 
     public SudokuView(SudokuModel model){
         super();
@@ -66,7 +67,7 @@ public class SudokuView extends BorderPane {
 
         Menu helpMenu = new Menu("Help");
         clearItem = new MenuItem("Clear game");
-        MenuItem checkItem = new MenuItem("Check if numbers are correct");
+        checkItem = new MenuItem("Check if numbers are correct");
         MenuItem rulesItem = new MenuItem("rules");
         helpMenu.getItems().addAll(clearItem,checkItem,rulesItem);
 
@@ -223,11 +224,11 @@ public class SudokuView extends BorderPane {
 
         EventHandler<ActionEvent> clearButtonHandler = actionEvent -> controller.handleClearButton();
         clearButton.addEventHandler(ActionEvent.ACTION, clearButtonHandler);
-        clearItem.addEventHandler(ActionEvent.ACTION, clearButtonHandler);
         EventHandler<ActionEvent> hintButtonHandler = actionEvent -> controller.handleHintButton();
         hintButton.addEventHandler(ActionEvent.ACTION, hintButtonHandler);
         EventHandler<ActionEvent> checkButtonHandler = actionEvent -> controller.handleCheckButton();
         checkButton.addEventHandler(ActionEvent.ACTION, checkButtonHandler);
+        checkItem.addEventHandler(ActionEvent.ACTION, checkButtonHandler);
 
         EventHandler<MouseEvent> tileCLickHandler = new EventHandler<MouseEvent>() {
             @Override
