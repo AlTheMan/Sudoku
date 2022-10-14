@@ -17,10 +17,10 @@ public class SudokuController {
     public void handleCheckButton() {
         System.out.println("Check button");
         if (model.checkIfNoMistakes()) {
-            System.out.println("No mistakes");
+            view.showAlert("No mistakes yet!");
         }
         else{
-            System.out.println("Mistakes were made");
+            view.showAlert("You made some mistakes! :(");
         }
 
     }

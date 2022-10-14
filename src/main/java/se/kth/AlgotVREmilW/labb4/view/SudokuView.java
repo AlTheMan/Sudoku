@@ -219,6 +219,12 @@ public class SudokuView extends BorderPane {
 
 
 //----------------event handlers-----------------
+
+    public void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.NONE, message, ButtonType.OK);
+        alert.showAndWait();
+    }
+
     private void addEventHandlers(SudokuController controller) {
         addNumberButtons(controller);
 
