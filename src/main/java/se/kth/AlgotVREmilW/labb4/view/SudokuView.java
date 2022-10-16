@@ -13,9 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
+
 import javafx.scene.text.FontWeight;
-import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
+import se.kth.AlgotVREmilW.labb4.model.Facade;
 
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.SECTIONS_PER_ROW;
@@ -24,7 +24,7 @@ public class SudokuView extends BorderPane {
     private Label[][] numberTiles; // the tiles/squares to show in the ui grid
     private TilePane numberPane;
     private TilePane gridView;
-    private SudokuModel model;
+    private Facade facade;
     private Button[] numberButton;
     private Button clearButton;
     private Button hintButton;
@@ -32,10 +32,10 @@ public class SudokuView extends BorderPane {
     private MenuItem clearItem;
     private MenuItem checkItem;
 
-    public SudokuView(SudokuModel model){
+    public SudokuView(Facade facade){
         super();
-        this.model = model;
-        SudokuController controller = new SudokuController(this, model);
+        this.facade = facade;
+        SudokuController controller = new SudokuController(this, facade);
         initAndAddgrid();
         addMenu();
         addLeftPane();
@@ -128,11 +128,6 @@ public class SudokuView extends BorderPane {
     }
 
 
-
-
-
-
-
     //------------grid view --------------------
     public TilePane getPane(){
         return numberPane;
@@ -146,7 +141,7 @@ public class SudokuView extends BorderPane {
                 //TODO: lägg till nummer här mha model.getNr()
 
                 //TODO: ändra från startPositionen
-                Label tile = new Label(model.getNrFromStartPositions(row, col)); // data from model
+                Label tile = new Label(facade.getSudokuString(row, col));
                 tile.setPrefWidth(32);
                 tile.setPrefHeight(32);
                 tile.setFont(font);
@@ -157,9 +152,31 @@ public class SudokuView extends BorderPane {
                 numberTiles[row][col] = tile;
             }
         }
+        setColorsForNumbers();
     }
 
-    private final TilePane makeNumberPane() {
+    public void updateGameBoard() {
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
+                numberTiles[i][j].setText(facade.getSudokuString(i, j));
+            }
+        }
+    }
+
+    public void setColorsForNumbers(){
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
+                if(!facade.getIfSudokuStartNr(i, j)) {
+                    numberTiles[i][j].setStyle("-fx-border-color: black; -fx-text-fill: blue; -fx-border-width: 0.5px;");
+                }
+                else {
+                    numberTiles[i][j].setStyle("-fx-border-color: black; -fx-text-fill: black; -fx-border-width: 0.5px;");
+                }
+            }
+        }
+    }
+
+    private TilePane makeNumberPane() {
         // create the root tile pane
         TilePane root = new TilePane();
         root.setPrefColumns(SECTIONS_PER_ROW);
@@ -200,28 +217,6 @@ public class SudokuView extends BorderPane {
     public Label[][] getNumberTilesArr(){
         return numberTiles;
     }
-
-    public void setNumberOnTile(int row, int col, String number){
-        numberTiles[row][col].setStyle("-fx-border-color: black; -fx-text-fill: grey; -fx-border-width: 0.5px;"); // css style
-        numberTiles[row][col].setText(number);
-    }
-
-    public void setNumberOnTileOriginalFont(int row, int col, String number){
-        numberTiles[row][col].setText(number);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

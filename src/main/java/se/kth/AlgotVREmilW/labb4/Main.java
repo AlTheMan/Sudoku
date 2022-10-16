@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
+import se.kth.AlgotVREmilW.labb4.model.Facade;
 import se.kth.AlgotVREmilW.labb4.view.SudokuView;
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 
@@ -16,8 +16,8 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
 
-        SudokuModel model = new SudokuModel(SudokuLevel.EASY);
-        SudokuView view = new SudokuView(model);
+        Facade facade = new Facade();
+        SudokuView view = new SudokuView(facade);
         Scene scene = new Scene(view);
         //Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 

@@ -3,165 +3,106 @@ package se.kth.AlgotVREmilW.labb4.model;
 import java.util.Random;
 
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
-public class SudokuModel {
+    class SudokuModel {
     private int[][][] game;
-    private int[][] gameCopy;  //contains a copy of the initial state of the game
+    private int[][] gameAtStartCopy;  //contains a copy of the initial state of the game
+    private SudokuTile[][] sudokuTiles;
+    private Facade facade;
 
-    public SudokuModel(SudokuLevel sudokuLevel) {
+    public SudokuModel(SudokuLevel sudokuLevel, Facade facade) {
+        this.facade = facade;
+        sudokuTiles = new SudokuTile[GRID_SIZE][GRID_SIZE];
         this.game = generateSudokuMatrix(sudokuLevel);
-        gameCopy = new int[GRID_SIZE][GRID_SIZE];
-        makeGameCopy();
+        randomizeGameBoard();
+        gameAtStartCopy = new int[GRID_SIZE][GRID_SIZE];
+        createSudokuTiles();
+        makeGameAtStartCopy();
     }
 
-    //TODO: ändra namn. inte längre start position
-    public String getNrFromStartPositions(int x, int y){
-        if(String.valueOf(game[x][y][0]).equals("0")) return "";
-        return String.valueOf(game[x][y][0]);
+    private void updateFacadeGameState(){
+        int[][] gameState = new int[GRID_SIZE][GRID_SIZE];
+        for (int i = 0; i<9; i++){
+            for (int j = 0; j < 9; j++) {
+                gameState[i][j] = game[i][j][0];
+            }
+        }
+        facade.gameState = gameState;
     }
 
-    public int getNr(int x, int y){
+    public void changeDifficulty(SudokuLevel difficulty) {
+        this.game = generateSudokuMatrix(difficulty);
+        randomizeGameBoard();
+        makeGameAtStartCopy();
+        createSudokuTiles();
+        updateFacadeGameState();
+    }
+
+
+
+    public void createSudokuTiles() {
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
+                if(sudokuTiles[i][j] == null){
+                    sudokuTiles[i][j] = new SudokuTile();
+                }
+                sudokuTiles[i][j].setVisible(false);
+                sudokuTiles[i][j].setIfStartNr(false);
+                if(game[i][j][0] != 0){
+                    sudokuTiles[i][j].setVisible(true);
+                    sudokuTiles[i][j].setIfStartNr(true);
+                }
+                sudokuTiles[i][j].setNumber(game[i][j][1]);
+            }
+        }
+    }
+
+
+    public int getSudokuMatrix(int row, int col, int depth) {
+        return game[row][col][depth];
+    }
+
+    public SudokuTile[][] getSudokuTiles(){
+        return sudokuTiles;
+    }
+
+    public int getGameNr(int x, int y){
         return game[x][y][0];
     }
-
-    public int getGameCopyNr(int x, int y) {
-        return gameCopy[x][y];
+    public void setGameNr(int x, int y, int value){
+        game[x][y][0] = value;
+        updateFacadeGameState();
     }
 
-//    for(int i =0; i<GRID_SIZE; i++){
-//        for(int j=0; j<GRID_SIZE; j++){
-//        }
-//    }
+    public int getGameAtStartNumber(int x, int y) {
+        return gameAtStartCopy[x][y];
+    }
 
-    //getters för int[][][0] till GridView
-
-    private void makeGameCopy(){
+    int[][] makeGameAtStartCopy(){
         for(int i =0; i<GRID_SIZE; i++){
             for(int j=0; j<GRID_SIZE; j++){
-                gameCopy[i][j] = game[i][j][0];
+                gameAtStartCopy[i][j] = game[i][j][0];
             }
         }
-    }
-    private boolean checkIfStartNrExistAtPosition(int x, int y){
-        if (gameCopy[x][y]!=0) return false;
-        return true;
-    }
-
-    public boolean updateGame(int x, int y, int inputNr ){
-        if(inputNr==0) {
-            if(!checkIfStartNrExistAtPosition(x, y)){
-                System.out.println("You tried to change a startNr");
-                return false; //TODO: illegal move
-            }
-        }
-        else if(!checkLegalMove(x,y,inputNr)) {
-            System.out.println("Illegal move"); //deta måste ta bort
-            //TODO: detta måste tas bort
-            return false; //throws new Exception(); //ska kasta exception
-        }
-        game[x][y][0]= inputNr;
-        return true;
-    }
-
-    public boolean checkLegalMove(int x, int y, int inputNr ){
-        //TODO: kolla om inputNr==0 behövs kollas
-        if(inputNr==0){
-            if(gameCopy[x][y]!=0) return false;         //så att man inte kan placera på startvärden
-            return true;
-        }
-        for(int i =0; i<GRID_SIZE; i++){
-            if (game[i][y][0] == inputNr) return false;
-            if (game[x][i][0] == inputNr) return false;
-        }
-        if(gameCopy[x][y]!=0) return false;         //så att man inte kan placera på startvärden
-
-        //kollar om det finns samma siffra i samma ruta:
-        //om man har position [8][0], så blir mod3 av 8 = 2.
-        //då räknar man 8-2 för att få startindex, alltså
-        // börjar man leta på index [6][0] och letar fram 3 rutor i vardera håll.
-        int modX= x%3;
-        int modY= y%3;
-        for(int i=0; i<SECTION_SIZE; i++){
-            for(int j=0; j<SECTION_SIZE; j++){
-                if(game[x-modX+i][y-modY+j][0]== inputNr) return false;
-                if(game[x-modX+j][y-modY+i][0]== inputNr) return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Sets a random number on the game and returns an array to identify the number
-     *
-     * @return an array with 1st element being the x-value, 2nd element y-value, and 3rd element the number in that position.
-     */
-    public int[] getHint(){
-        Random random = new Random();
-        int[] hintNr = new int[3];
-        if(checkIfGameIsSolved()) return hintNr;   //för att förhindra att spelet krashar ifall man trycker på "hint" knappen när spelet är löst.
-
-        while(true){
-            int nr1= random.nextInt(9);
-            int nr2= random.nextInt(9);
-            if(game[nr1][nr2][0]!=game[nr1][nr2][1]){
-                hintNr[0] = nr1;                    //x-värdet
-                hintNr[1] = nr2;                    //y-värdet
-                hintNr[2] = game[nr1][nr2][1];      //vilken siffra på positionen
-                return hintNr;
-            }
-        }
-
-    }
-
-    public boolean checkIfGameIsSolved(){
-        for(int i=0; i<GRID_SIZE; i++){
-            for(int j=0; j<GRID_SIZE; j++){
-                if(game[i][j][0] != game[i][j][1]) return false;  //man kan också bara kolla om game[i][j][0]!=0, eftersom varje input ska vara laglig
-            }
-        }
-        return true;
-    }
-
-    //TODO: return game för vy kanske
-
-    public void clearGame(){
-        for(int i =0; i<GRID_SIZE; i++){
-            for(int j=0; j<GRID_SIZE; j++){
-                game[i][j][0] = gameCopy[i][j];
-            }
-        }
-    }
-
-    public boolean checkIfNoMistakes(){
-        for (int i = 0; i < GRID_SIZE; i++){
-            for (int j = 0; j < GRID_SIZE; j++){
-                if(game[i][j][0] != 0){
-                    if(game[i][j][0] != game[i][j][1]) return false;
-                }
-            }
-        }
-        return true;
+        return gameAtStartCopy;
     }
 
 
-    //TODO: göra psuedorandom generering för spelplanen
+        //TODO: göra psuedorandom generering för spelplanen
     // updatera oxå gameCopy
 
     /**
      * Randomizes two numbers between 1-9 to switch with each other.
      * Changes both the player board and the solution board.
      */
-    public void randomizeGameBoard() { //TODO: make private and maybe reverse the array?
+    public void randomizeGameBoard() { //TODO: Ska göras static och flyttas till SudokuUtil
         Random rand = new Random();
         int rand1 = rand.nextInt(GRID_SIZE) + 1;
         int rand2 = rand1;
-
         while(rand2 == rand1){      // Makes sure the numbers aren't the same
             rand2 = rand.nextInt(GRID_SIZE) + 1;
         }
 
-        System.out.println("Random nr 1 = " + rand1);           //TODO: Ta bort sen
-        System.out.println("Random nr 2 = "+ rand2 + "\n");
+        // The two random numbers swaps places
 
         for (int i = 0; i < GRID_SIZE; i++){
             for (int j = 0; j < GRID_SIZE; j++) {
@@ -179,24 +120,44 @@ public class SudokuModel {
                 }
             }
         }
-        reverseArray();
-        makeGameCopy();
+        rand1 = rand.nextInt(2);
+        rand2 = rand.nextInt(2);
+        if (rand1 == 1) reverseVertical();
+        if (rand2 == 1) reverseHorizontal();
     }
 
-    public void reverseArray() {
+    public void reverseHorizontal() {
         int[] tmpUnsolved = new int[9];
         int[] tmpSolved = new int[9];
 
-        for (int j = 0; j < GRID_SIZE; j++) {
+        for (int i = 0; i < GRID_SIZE; i++) {
             int size = 0;
-            for (int i = GRID_SIZE - 1; i >= 0; i--) {
+            for (int j = GRID_SIZE - 1; j >= 0; j--) {
                 tmpUnsolved[size] = game[i][j][0];
                 tmpSolved[size] = game[i][j][1];
                 size++;
             }
-            for (int i = 0; i < GRID_SIZE; i++) {
-                game[i][j][0] = tmpUnsolved[i];
-                game[i][j][1] = tmpSolved[i];
+            for (int j = 0; j < GRID_SIZE; j++) {
+                game[i][j][0] = tmpUnsolved[j];
+                game[i][j][1] = tmpSolved[j];
+            }
+        }
+    }
+
+    public void reverseVertical(){
+        int[] tmpUnsolved = new int[9];
+        int[] tmpSolved = new int[9];
+
+        for (int i = 0; i < GRID_SIZE; i++) {
+            int size = 0;
+            for (int j = GRID_SIZE - 1; j >= 0; j--) {
+                tmpUnsolved[size] = game[j][i][0];
+                tmpSolved[size] = game[j][i][1];
+                size++;
+            }
+            for (int j = 0; j < GRID_SIZE; j++) {
+                game[j][i][0] = tmpUnsolved[j];
+                game[j][i][1] = tmpSolved[j];
             }
         }
     }

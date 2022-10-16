@@ -1,7 +1,8 @@
 package se.kth.AlgotVREmilW.labb4.view;
 
-import javafx.scene.control.Label;
-import se.kth.AlgotVREmilW.labb4.model.SudokuModel;
+import se.kth.AlgotVREmilW.labb4.model.Facade;
+import se.kth.AlgotVREmilW.labb4.model.SudokuUtilities;
+
 
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.GRID_SIZE;
 
@@ -9,16 +10,16 @@ public class SudokuController {
     private int number;
 
     private SudokuView view;
-    private SudokuModel model;
+    private Facade facade;
 
-    public SudokuController(SudokuView view, SudokuModel model) {
+    public SudokuController(SudokuView view, Facade facade) {
         this.view = view;
-        this.model = model;
+        this.facade = facade;
     }
 
     public void handleCheckButton() {
         System.out.println("Check button");
-        if (model.checkIfNoMistakes()) {
+        if (facade.checkIfNoMistakes()) {
             view.showAlert("No mistakes yet!");
         }
         else{
@@ -28,27 +29,22 @@ public class SudokuController {
     }
 
     public void handleHintButton() {
-        int[] addHint = model.getHint();
-        //System.out.println("Hint gotten: x = " + (addHint[1] + 1) + ", y = " + (addHint[0] + 1) + ", Sudoku: " + addHint[2]); //TODO: Ta bort
-        if(model.updateGame(addHint[0], addHint[1], addHint[2])){
-            view.setNumberOnTile(addHint[0], addHint[1], String.valueOf(addHint[2]));
-            //System.out.println("Hint added: x = " + (addHint[1] + 1) + ", y = " + (addHint[0] + 1) + ", Sudoku: " + addHint[2]); //TODO: Ta bort
+        /*int[] addHint = facade.getHint();
+        if(facade.updateGame(addHint[0], addHint[1], addHint[2])){
+            view.updateGameBoard();
         }
+        if(facade.checkIfGameIsSolved()) {
+            view.showAlert("Congratulations!");
+        }*/
+        facade.changeDifficulty(SudokuUtilities.SudokuLevel.MEDIUM);
+        view.setColorsForNumbers();
+        view.updateGameBoard();
+
     }
 
     public void handleClearItem() {
-        model.clearGame();
-        for(int x=0; x<GRID_SIZE; x++){
-            for(int y=0; y<GRID_SIZE; y++){
-                if(model.getNr(x,y)==0){
-                    view.setNumberOnTileOriginalFont(x, y, "");
-                }
-                else{
-                    view.setNumberOnTileOriginalFont(x, y, String.valueOf(model.getNr(x,y)));
-                }
-
-            }
-        }
+        facade.clearGame();
+        view.updateGameBoard();
     }
 
 
@@ -95,23 +91,26 @@ public class SudokuController {
 
     public void handleCenterClick(int row, int col) {
 
-        if (this.number == 0) {
-            String blank = "";
-            if (model.getGameCopyNr(row, col) == 0){
-                model.updateGame(row, col, this.number);
-                view.setNumberOnTile(row, col, blank);
+        /*if (this.number == 0) {
+            if (facade.getCopyOfStart(row, col) == 0){
+                facade.updateGame(row, col, this.number);
+                view.updateGameBoard();
             }
         }
-        else if (model.checkLegalMove(row, col, number)) {
-            model.updateGame(row, col, number);
-            view.setNumberOnTile(row, col, String.valueOf(number));
+        else if (facade.checkLegalMove(row, col, number)) {
+            facade.updateGame(row, col, number);
+            view.updateGameBoard();
             System.out.println("Success");
         }
         else {
             //view.showAlert("Can't place here!");
-        }
+        }*/
         //TODO: else show alert, elr do nothing
-
+        facade.updateGame(row, col, number);
+        view.updateGameBoard();
+        if(facade.checkIfGameIsSolved()) {
+            view.showAlert("Congratulations!");
+        }
     }
 
 
