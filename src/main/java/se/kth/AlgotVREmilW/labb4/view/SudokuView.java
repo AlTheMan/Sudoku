@@ -19,6 +19,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import se.kth.AlgotVREmilW.labb4.model.Facade;
 
+import java.io.File;
 import java.io.IOException;
 
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
@@ -238,13 +239,20 @@ public class SudokuView extends BorderPane {
         FileChooser fileChooser = new FileChooser();
         Stage stage = new Stage();
         fileChooser.setTitle("Save File");
-        facade.saveFile(fileChooser.showSaveDialog(stage));
+
+        File file = fileChooser.showSaveDialog(stage);
+        if(file!=null){
+            facade.saveFile(file);
+        }
     }
     public void loadFile() throws IOException, ClassNotFoundException{
         FileChooser fileChooser = new FileChooser();
         Stage stage = new Stage();
         fileChooser.setTitle("Load file");
-        facade.loadFile(fileChooser.showOpenDialog(stage));
+        File file = fileChooser.showOpenDialog(stage);
+        if(file!=null){
+            facade.loadFile(file);
+        }
     }
 
 
