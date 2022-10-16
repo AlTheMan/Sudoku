@@ -15,8 +15,8 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
         this.game = generateSudokuMatrix(sudokuLevel);
         randomizeGameBoard();
         gameAtStartCopy = new int[GRID_SIZE][GRID_SIZE];
-        createSudokuTiles();
         makeGameAtStartCopy();
+        createSudokuTiles();
     }
 
 
@@ -41,13 +41,20 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 
     public void loadGame(int[][][] loadedGame) {
         this.game = loadedGame;
-        makeGameAtStartCopy();
         createSudokuTiles();
         updateFacadeGameState();
     }
 
     public int[][][] getGame(){
         return game;
+    }
+
+    public int[][] getGameAtStartCopy() {
+        return gameAtStartCopy;
+    }
+
+    public void setGameAtStartCopy(int[][] gameAtStartCopy) {
+        this.gameAtStartCopy = gameAtStartCopy;
     }
 
 
@@ -59,9 +66,11 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
                 }
                 sudokuTiles[i][j].setVisible(false);
                 sudokuTiles[i][j].setIfStartNr(false);
-                if(game[i][j][0] != 0){
-                    sudokuTiles[i][j].setVisible(true);
+                if(gameAtStartCopy[i][j] != 0){
                     sudokuTiles[i][j].setIfStartNr(true);
+                }
+                if(game[i][j][0] != 0) {
+                    sudokuTiles[i][j].setVisible(true);
                 }
                 sudokuTiles[i][j].setNumber(game[i][j][1]);
             }

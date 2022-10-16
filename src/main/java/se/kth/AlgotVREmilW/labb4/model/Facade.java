@@ -9,8 +9,8 @@ import static se.kth.AlgotVREmilW.labb4.model.SaveAndLoadFile.*;
 public class Facade {
 
     int[][] gameState;
-    private SudokuModel model;
-    private SudokuTile[][] sudokuTiles;
+    private final SudokuModel model;
+    private final SudokuTile[][] sudokuTiles;
     private SudokuLevel difficulty;
     public Facade() {
         this.difficulty = SudokuLevel.EASY;
@@ -53,14 +53,6 @@ public class Facade {
         return true;
     }
 
-    private void printGameState() {
-        for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < GRID_SIZE; j++) {
-                System.out.print(gameState[i][j]);
-            }
-            System.out.println();
-        }
-    }
 
     public boolean checkIfGameIsSolved(){
         for(int i=0; i<GRID_SIZE; i++){
@@ -97,7 +89,7 @@ public class Facade {
         return true;
     }
     public SudokuLevel getDifficulty(){
-        return  difficulty;
+        return difficulty;
     }
 
     public boolean checkLegalMove(int x, int y, int inputNr ){
@@ -127,11 +119,23 @@ public class Facade {
     }
 
     public void saveFile(File file) throws IOException {
-        serializeToFile(file, model.getGame());
+        SaveState state = new SaveState(model.getGame(), model.getGameAtStartCopy());
+        serializeToFile(file, state);
     }
     //TODO: hantera exception
     public void loadFile(File file) throws IOException, ClassNotFoundException{
-        model.loadGame(deSerializeFromFile(file));
+        SaveState state = deSerializeFromFile(file);
+        model.setGameAtStartCopy(state.getBeginningState());
+        model.loadGame(state.getGame());
+    }
+
+    private void printGameState() {
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
+                System.out.print(gameState[i][j]);
+            }
+            System.out.println();
+        }
     }
 
 

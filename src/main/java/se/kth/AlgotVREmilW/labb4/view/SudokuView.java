@@ -324,9 +324,7 @@ public class SudokuView extends BorderPane {
         EventHandler<ActionEvent> loadGameItemHandler = actionEvent -> {
             try {
                 controller.handleLoadGameItem();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
         };

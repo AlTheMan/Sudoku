@@ -33,6 +33,7 @@ public class SudokuController {
     public void handleLoadGameItem() throws IOException,ClassNotFoundException{
         view.loadFile();
         view.updateAllTiles();
+        view.setColorsForNumbers();
     }
 
     public void handleNewGameItem(){
@@ -55,15 +56,11 @@ public class SudokuController {
     public void handleHintButton() {
         int[] addHint = facade.getHint();
         if(facade.updateGame(addHint[0], addHint[1], addHint[2])){
-            //view.setColorsForNumbers();
             view.updateAllTiles();
         }
         if(facade.checkIfGameIsSolved()) {
             view.showAlert("Congratulations!");
         }
-        //facade.changeDifficulty(SudokuUtilities.SudokuLevel.MEDIUM);
-        //view.updateAllTiles();
-
     }
 
     public void handleClearItem() {
@@ -132,22 +129,6 @@ public class SudokuController {
 
 
     public void handleCenterClick(int row, int col) {
-
-        /*if (this.number == 0) {
-            if (facade.getCopyOfStart(row, col) == 0){
-                facade.updateGame(row, col, this.number);
-                view.updateGameBoard();
-            }
-        }
-        else if (facade.checkLegalMove(row, col, number)) {
-            facade.updateGame(row, col, number);
-            view.updateGameBoard();
-            System.out.println("Success");
-        }
-        else {
-            //view.showAlert("Can't place here!");
-        }*/
-        //TODO: else show alert, elr do nothing
         facade.updateGame(row, col, number);
         view.updateTile(row, col);
         if(facade.checkIfGameIsSolved()) {
