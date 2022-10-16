@@ -169,7 +169,7 @@ public class Facade {
 
     //TODO: hantera exception
     /**
-     * Loads file from file. Can only load .Sudoku-files
+     * Loads file from file. Can only load .Sudoku-files (but Sudoku view is controlling that though)
      * @param file specified file to load
      * @throws IOException
      * @throws ClassNotFoundException
