@@ -263,9 +263,8 @@ public class SudokuView extends BorderPane {
         }
         fileChooser.setInitialDirectory(dir);
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Sudoku Files", ".sudoku"),
+                new FileChooser.ExtensionFilter("Sudoku Files", "*.sudoku"),
                 new FileChooser.ExtensionFilter("All Files", "*"));
-
     }
 
 
