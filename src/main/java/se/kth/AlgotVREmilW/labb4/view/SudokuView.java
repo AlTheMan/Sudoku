@@ -19,6 +19,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import se.kth.AlgotVREmilW.labb4.model.Facade;
 
+import java.io.IOException;
+
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.SECTIONS_PER_ROW;
 
@@ -43,7 +45,7 @@ public class SudokuView extends BorderPane {
     private MenuItem exitItem;
 
 
-    public SudokuView(Facade facade){
+    public SudokuView(Facade facade) throws Exception{
         super();
         this.facade = facade;
         SudokuController controller = new SudokuController(this, facade);
@@ -232,17 +234,17 @@ public class SudokuView extends BorderPane {
         return numberTiles;
     }
 
-    public void saveFile() {
+    public void saveFile()  throws IOException {
         FileChooser fileChooser = new FileChooser();
         Stage stage = new Stage();
         fileChooser.setTitle("Save File");
-        facade.setSaveFile(fileChooser.showSaveDialog(stage));
+        facade.saveFile(fileChooser.showSaveDialog(stage));
     }
-    public void loadFile() {
+    public void loadFile() throws IOException, ClassNotFoundException{
         FileChooser fileChooser = new FileChooser();
         Stage stage = new Stage();
         fileChooser.setTitle("Load file");
-        facade.setLoadFile(fileChooser.showOpenDialog(stage));
+        facade.loadFile(fileChooser.showOpenDialog(stage));
     }
 
 
@@ -254,7 +256,7 @@ public class SudokuView extends BorderPane {
         alert.showAndWait();
     }
 
-    private void addEventHandlers(SudokuController controller) {
+    private void addEventHandlers(SudokuController controller) throws IOException, ClassNotFoundException{
         addNumberButtons(controller);
 
         EventHandler<ActionEvent> clearButtonHandler = actionEvent -> controller.handleClearButton();
@@ -287,10 +289,24 @@ public class SudokuView extends BorderPane {
         rulesItem.addEventHandler(ActionEvent.ACTION, rulesItemHandler);
 
 
-        EventHandler<ActionEvent> saveGameItemHandler = actionEvent -> controller.handleSaveGameItem();
+        EventHandler<ActionEvent> saveGameItemHandler = actionEvent -> {
+            try {
+                controller.handleSaveGameItem();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        };
         saveGameItem.addEventHandler(ActionEvent.ACTION, saveGameItemHandler);
 
-        EventHandler<ActionEvent> loadGameItemHandler = actionEvent -> controller.handleLoadGameItem();
+        EventHandler<ActionEvent> loadGameItemHandler = actionEvent -> {
+            try {
+                controller.handleLoadGameItem();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        };
         loadGameItem.addEventHandler(ActionEvent.ACTION, loadGameItemHandler);
 
         EventHandler<MouseEvent> tileCLickHandler = new EventHandler<MouseEvent>() {

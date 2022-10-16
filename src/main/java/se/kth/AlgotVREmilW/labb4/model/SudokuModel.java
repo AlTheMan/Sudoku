@@ -19,6 +19,8 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
         makeGameAtStartCopy();
     }
 
+
+
     private void updateFacadeGameState(){
         int[][] gameState = new int[GRID_SIZE][GRID_SIZE];
         for (int i = 0; i<9; i++){
@@ -37,6 +39,16 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
         updateFacadeGameState();
     }
 
+    public void loadGame(int[][][] loadedGame) {
+        this.game = loadedGame;
+        makeGameAtStartCopy();
+        createSudokuTiles();
+        updateFacadeGameState();
+    }
+
+    public int[][][] getGame(){
+        return game;
+    }
 
 
     public void createSudokuTiles() {

@@ -1,8 +1,10 @@
 package se.kth.AlgotVREmilW.labb4.model;
 import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
+import static se.kth.AlgotVREmilW.labb4.model.SaveAndLoadFile.*;
 
 public class Facade {
 
@@ -124,11 +126,12 @@ public class Facade {
         return true;
     }
 
-    public void setSaveFile(File file){
-
+    public void saveFile(File file) throws IOException {
+        serializeToFile(file, model.getGame());
     }
-    public void setLoadFile(File file){
-
+    //TODO: hantera exception
+    public void loadFile(File file) throws IOException, ClassNotFoundException{
+        model.loadGame(deSerializeFromFile(file));
     }
 
 

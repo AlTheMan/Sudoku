@@ -3,6 +3,8 @@ package se.kth.AlgotVREmilW.labb4.view;
 import se.kth.AlgotVREmilW.labb4.model.Facade;
 import se.kth.AlgotVREmilW.labb4.model.SudokuUtilities;
 
+import java.io.IOException;
+
 public class SudokuController {
     private int number;
 
@@ -24,12 +26,13 @@ public class SudokuController {
 
     }
 
-    public void handleSaveGameItem(){
-
+    public void handleSaveGameItem()throws IOException {
+        view.saveFile();
     }
 
-    public void handleLoadGameItem(){
-
+    public void handleLoadGameItem() throws IOException,ClassNotFoundException{
+        view.loadFile();
+        view.updateAllTiles();
     }
 
     public void handleNewGameItem(){
