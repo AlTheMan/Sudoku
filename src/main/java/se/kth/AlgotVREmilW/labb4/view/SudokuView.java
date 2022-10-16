@@ -159,12 +159,15 @@ public class SudokuView extends BorderPane {
         setColorsForNumbers();
     }
 
-    public void updateGameBoard() {
+    public void updateAllTiles() {
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 numberTiles[i][j].setText(facade.getSudokuString(i, j));
             }
         }
+    }
+    public void updateTile(int row, int col) {
+       numberTiles[row][col].setText(facade.getSudokuString(row, col));
     }
 
     public void setColorsForNumbers(){

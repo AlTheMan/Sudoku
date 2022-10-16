@@ -3,9 +3,6 @@ package se.kth.AlgotVREmilW.labb4.view;
 import se.kth.AlgotVREmilW.labb4.model.Facade;
 import se.kth.AlgotVREmilW.labb4.model.SudokuUtilities;
 
-
-import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.GRID_SIZE;
-
 public class SudokuController {
     private int number;
 
@@ -37,13 +34,13 @@ public class SudokuController {
         }*/
         facade.changeDifficulty(SudokuUtilities.SudokuLevel.MEDIUM);
         view.setColorsForNumbers();
-        view.updateGameBoard();
+        view.updateAllTiles();
 
     }
 
     public void handleClearItem() {
         facade.clearGame();
-        view.updateGameBoard();
+        view.updateAllTiles();
     }
 
     
@@ -51,17 +48,17 @@ public class SudokuController {
     public void handleEasyItem() {
         facade.changeDifficulty(SudokuUtilities.SudokuLevel.EASY);
         view.setColorsForNumbers();
-        view.updateGameBoard();
+        view.updateAllTiles();
     }
     public void handleMediumItem() {
         facade.changeDifficulty(SudokuUtilities.SudokuLevel.MEDIUM);
         view.setColorsForNumbers();
-        view.updateGameBoard();
+        view.updateAllTiles();
     }
     public void handleHardItem() {
         facade.changeDifficulty(SudokuUtilities.SudokuLevel.HARD);
         view.setColorsForNumbers();
-        view.updateGameBoard();
+        view.updateAllTiles();
     }
 
 
@@ -124,7 +121,7 @@ public class SudokuController {
         }*/
         //TODO: else show alert, elr do nothing
         facade.updateGame(row, col, number);
-        view.updateGameBoard();
+        view.updateTile(row, col);
         if(facade.checkIfGameIsSolved()) {
             view.showAlert("Congratulations!");
         }
