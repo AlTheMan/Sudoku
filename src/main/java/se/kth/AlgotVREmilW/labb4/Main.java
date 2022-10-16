@@ -28,7 +28,7 @@ public class Main extends Application {
         if (application_icon_dir.exists()){
             stage.getIcons().add(new Image(String.valueOf(application_icon_dir)));
         }
-        stage.setTitle("Hello!");
+        stage.setTitle("Sudoku Time!");
         stage.setScene(scene);
         stage.setResizable(false);  //TODO: kanske gör detta på ett annat sätt
         stage.show();
