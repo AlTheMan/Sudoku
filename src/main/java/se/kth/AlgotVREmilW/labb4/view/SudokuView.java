@@ -249,22 +249,23 @@ public class SudokuView extends BorderPane {
     public void loadFile() throws IOException, ClassNotFoundException{
         FileChooser fileChooser = new FileChooser();
         Stage stage = new Stage();
-        fileChooser.setTitle("Load file");
         configureFileChooser(fileChooser);  //så att man hamnar på förutbestämt directory
+        fileChooser.setTitle("Load file");
         File file = fileChooser.showOpenDialog(stage);
         if(file!=null){
             facade.loadFile(file);
         }
     }
     private static void configureFileChooser(final FileChooser fileChooser){
-        fileChooser.setTitle("View Pictures");
-
         File dir = new File(System.getProperty("user.home"), "/labb4_spara");
         if (! dir.exists()) {
             dir.mkdirs();
         }
-
         fileChooser.setInitialDirectory(dir);
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Sudoku Files", ".sudoku"),
+                new FileChooser.ExtensionFilter("All Files", "*"));
+
     }
 
 
