@@ -257,7 +257,7 @@ public class SudokuView extends BorderPane {
         mediumItem.addEventHandler(ActionEvent.ACTION, mediumItemHandler);
 
         EventHandler<ActionEvent> hardItemHandler = actionEvent -> controller.handleHardItem();
-        mediumItem.addEventHandler(ActionEvent.ACTION, hardItemHandler);
+        hardItem.addEventHandler(ActionEvent.ACTION, hardItemHandler);
 
 
 
