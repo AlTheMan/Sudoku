@@ -6,6 +6,9 @@ import java.util.Random;
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 import static se.kth.AlgotVREmilW.labb4.model.SaveAndLoadFile.*;
 
+/**
+ * Is the facade of model
+ */
 public class Facade {
 
     int[][] gameState;
@@ -26,7 +29,9 @@ public class Facade {
         return sudokuTiles[x][y].getIfStartNr();
     }
 
-
+    /**
+     * Resets all tiles of the game to startpositions
+     */
     public void clearGame(){
         for(int i =0; i<GRID_SIZE; i++){
             for(int j=0; j<GRID_SIZE; j++){
@@ -36,12 +41,21 @@ public class Facade {
         }
     }
 
+    /**
+     * Generates a new game with the set difficulty
+     * @param difficulty sets the difficulty of the new game
+     */
     public void changeDifficulty(SudokuLevel difficulty){
         this.difficulty = difficulty;
         model.changeDifficulty(difficulty);
         clearGame();
     }
 
+    /**
+     * Checks if user has entered any incorrect numbers
+     * Is used to alert user of their mistakes
+     * @return true if there has been mistakes, false otherwise
+     */
     public boolean checkIfNoMistakes(){
         for (int i = 0; i < GRID_SIZE; i++){
             for (int j = 0; j < GRID_SIZE; j++){
@@ -54,6 +68,10 @@ public class Facade {
     }
 
 
+    /**
+     * Checks if game is solved
+     * @return
+     */
     public boolean checkIfGameIsSolved(){
         for(int i=0; i<GRID_SIZE; i++){
             for(int j=0; j<GRID_SIZE; j++){
@@ -63,6 +81,11 @@ public class Facade {
         return true;
     }
 
+    /**
+     * Returns the position and value of a correct tile that the user has not
+     * yet entered
+     * @return an int[] with the first element representing which row, and second element which column the tile is positioned at. The third element represents the tiles value
+     */
     public int[] getHint(){
         Random random = new Random();
         int[] hintNr = new int[3];
@@ -79,6 +102,14 @@ public class Facade {
             }
         }
     }
+
+    /**
+     * Updates a specific tile with the input number
+     * @param x what row should be updated
+     * @param y what column should be updated
+     * @param inputNr what value the tile should have
+     * @return true if successfuly updated game
+     */
     public boolean updateGame(int x, int y, int inputNr ){
         if(!checkLegalMove(x,y,inputNr)) {
             System.out.println("Illegal move"); //TODO: detta måste tas bort
@@ -92,6 +123,13 @@ public class Facade {
         return difficulty;
     }
 
+    /**
+     * Checks if it's legal to update tile at a specific position with a specific value.
+     * @param x specified row
+     * @param y specified column
+     * @param inputNr what value you want to check
+     * @return true if the move is legal
+     */
     public boolean checkLegalMove(int x, int y, int inputNr ){
         //TODO: kolla om inputNr==0 behövs kollas
         if(inputNr==0){
@@ -118,17 +156,33 @@ public class Facade {
         return true;
     }
 
+    /**
+     * Saves the class SaveState to a file with the ending .Sudoku
+     * @param file filename
+     * @throws IOException
+     */
     public void saveFile(File file) throws IOException {
         SaveState state = new SaveState(model.getGame(), model.getGameAtStartCopy());
         serializeToFile(file, state);
     }
+
+
     //TODO: hantera exception
+    /**
+     * Loads file from file. Can only load .Sudoku-files
+     * @param file specified file to load
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void loadFile(File file) throws IOException, ClassNotFoundException{
         SaveState state = deSerializeFromFile(file);
         model.setGameAtStartCopy(state.getBeginningState());
         model.loadGame(state.getGame());
     }
 
+    /**
+     * prints the state of the game on terminal
+     */
     private void printGameState() {
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {

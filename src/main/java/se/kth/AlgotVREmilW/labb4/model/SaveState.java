@@ -2,6 +2,9 @@ package se.kth.AlgotVREmilW.labb4.model;
 
 import java.io.Serializable;
 
+/**
+ * Is used to save the state of the game via SaveAndLoadFile
+ */
 public class SaveState implements Serializable {
 
     private int[][][] game;
