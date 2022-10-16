@@ -230,7 +230,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
         }
     }
 
-   
+
     public void reverseVertical(){
         int[] tmpUnsolved = new int[9];
         int[] tmpSolved = new int[9];

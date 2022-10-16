@@ -124,7 +124,7 @@ public class Facade {
     }
 
     /**
-     * Checks if it's legal to update tile at a specific position with a specific value.
+     * Checks if it's legal to update tile at a specified position with specified value.
      * @param x specified row
      * @param y specified column
      * @param inputNr what value you want to check
