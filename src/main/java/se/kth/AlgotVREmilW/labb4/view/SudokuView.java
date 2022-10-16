@@ -15,6 +15,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import se.kth.AlgotVREmilW.labb4.model.Facade;
 
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
@@ -230,6 +232,19 @@ public class SudokuView extends BorderPane {
         return numberTiles;
     }
 
+    public void saveFile() {
+        FileChooser fileChooser = new FileChooser();
+        Stage stage = new Stage();
+        fileChooser.setTitle("Save File");
+        facade.setSaveFile(fileChooser.showSaveDialog(stage));
+    }
+    public void loadFile() {
+        FileChooser fileChooser = new FileChooser();
+        Stage stage = new Stage();
+        fileChooser.setTitle("Load file");
+        facade.setLoadFile(fileChooser.showOpenDialog(stage));
+    }
+
 
 
 //----------------event handlers-----------------
@@ -301,8 +316,6 @@ public class SudokuView extends BorderPane {
         }
 
     }
-
-
 
     private void addNumberButtons(SudokuController controller) {
         EventHandler<ActionEvent> buttonOneHandler = actionEvent -> controller.handleOneButton();

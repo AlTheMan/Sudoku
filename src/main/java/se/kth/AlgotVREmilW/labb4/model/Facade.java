@@ -1,4 +1,5 @@
 package se.kth.AlgotVREmilW.labb4.model;
+import java.io.File;
 import java.util.Random;
 
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
@@ -122,4 +123,13 @@ public class Facade {
 
         return true;
     }
+
+    public void setSaveFile(File file){
+
+    }
+    public void setLoadFile(File file){
+
+    }
+
+
 }
