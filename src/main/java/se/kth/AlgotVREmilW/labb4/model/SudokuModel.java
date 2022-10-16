@@ -77,15 +77,14 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
         return gameAtStartCopy[x][y];
     }
 
-    int[][] makeGameAtStartCopy(){
-        for(int i =0; i<GRID_SIZE; i++){
-            for(int j=0; j<GRID_SIZE; j++){
+    int[][] makeGameAtStartCopy() {
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
                 gameAtStartCopy[i][j] = game[i][j][0];
             }
         }
         return gameAtStartCopy;
     }
-
 
         //TODO: göra psuedorandom generering för spelplanen
     // updatera oxå gameCopy
