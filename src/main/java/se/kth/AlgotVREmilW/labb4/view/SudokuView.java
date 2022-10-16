@@ -31,6 +31,10 @@ public class SudokuView extends BorderPane {
     private Button checkButton;
     private MenuItem clearItem;
     private MenuItem checkItem;
+    private MenuItem newItem;
+    private MenuItem easyItem;
+    private MenuItem mediumItem;
+    private MenuItem hardItem;
 
     public SudokuView(Facade facade){
         super();
@@ -60,10 +64,10 @@ public class SudokuView extends BorderPane {
 
         //menu component
         Menu gameMenu = new Menu("Game");
-        MenuItem newItem = new MenuItem("New");
-        MenuItem easyItem = new MenuItem("Easy");
-        MenuItem mediumItem = new MenuItem("Medium");
-        MenuItem hardItem = new MenuItem("Hard");
+        newItem = new MenuItem("New");
+        easyItem = new MenuItem("Easy");
+        mediumItem = new MenuItem("Medium");
+        hardItem = new MenuItem("Hard");
         gameMenu.getItems().addAll(newItem, easyItem, mediumItem, hardItem);
 
         Menu helpMenu = new Menu("Help");
@@ -241,6 +245,19 @@ public class SudokuView extends BorderPane {
         EventHandler<ActionEvent> checkButtonHandler = actionEvent -> controller.handleCheckButton();
         checkButton.addEventHandler(ActionEvent.ACTION, checkButtonHandler);
         checkItem.addEventHandler(ActionEvent.ACTION, checkButtonHandler);
+
+        // Eventhandlers for changing difficulty
+        EventHandler<ActionEvent> easyItemHandler = actionEvent -> controller.handleEasyItem();
+        easyItem.addEventHandler(ActionEvent.ACTION, easyItemHandler);
+
+        EventHandler<ActionEvent> mediumItemHandler = actionEvent -> controller.handleMediumItem();
+        mediumItem.addEventHandler(ActionEvent.ACTION, mediumItemHandler);
+
+        EventHandler<ActionEvent> hardItemHandler = actionEvent -> controller.handleHardItem();
+        mediumItem.addEventHandler(ActionEvent.ACTION, hardItemHandler);
+
+
+
 
         EventHandler<MouseEvent> tileCLickHandler = new EventHandler<MouseEvent>() {
             @Override

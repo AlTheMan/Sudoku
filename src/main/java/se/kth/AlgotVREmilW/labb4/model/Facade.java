@@ -40,7 +40,6 @@ public class Facade {
     }
 
     public boolean checkIfNoMistakes(){
-        printGameState();
         for (int i = 0; i < GRID_SIZE; i++){
             for (int j = 0; j < GRID_SIZE; j++){
                 if(gameState[i][j] != 0){

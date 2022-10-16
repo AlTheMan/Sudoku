@@ -18,7 +18,6 @@ public class SudokuController {
     }
 
     public void handleCheckButton() {
-        System.out.println("Check button");
         if (facade.checkIfNoMistakes()) {
             view.showAlert("No mistakes yet!");
         }
@@ -44,6 +43,24 @@ public class SudokuController {
 
     public void handleClearItem() {
         facade.clearGame();
+        view.updateGameBoard();
+    }
+
+    
+
+    public void handleEasyItem() {
+        facade.changeDifficulty(SudokuUtilities.SudokuLevel.EASY);
+        view.setColorsForNumbers();
+        view.updateGameBoard();
+    }
+    public void handleMediumItem() {
+        facade.changeDifficulty(SudokuUtilities.SudokuLevel.MEDIUM);
+        view.setColorsForNumbers();
+        view.updateGameBoard();
+    }
+    public void handleHardItem() {
+        facade.changeDifficulty(SudokuUtilities.SudokuLevel.HARD);
+        view.setColorsForNumbers();
         view.updateGameBoard();
     }
 
