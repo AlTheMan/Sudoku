@@ -75,7 +75,7 @@ public class SudokuModel {
         if(gameCopy[x][y]!=0) return false;         //så att man inte kan placera på startvärden
 
         //kollar om det finns samma siffra i samma ruta:
-        //om man har position [8][0], så blir mod3 av 8 = 2.
+        //om man har position [8][0], så blir mod3 av 8 = 2. 2 är då den relativa positionen i den rutan
         //då räknar man 8-2 för att få startindex, alltså
         // börjar man leta på index [6][0] och letar fram 3 rutor i vardera håll.
         int modX= x%3;
