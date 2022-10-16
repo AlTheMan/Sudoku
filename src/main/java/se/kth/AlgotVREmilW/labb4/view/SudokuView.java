@@ -83,7 +83,7 @@ public class SudokuView extends BorderPane {
         Menu helpMenu = new Menu("Help");
         clearItem = new MenuItem("Clear game");
         checkItem = new MenuItem("Check if numbers are correct");
-        rulesItem = new MenuItem("rules");
+        rulesItem = new MenuItem("Rules");
         helpMenu.getItems().addAll(clearItem,checkItem,rulesItem);
 
 
