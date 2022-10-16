@@ -259,10 +259,12 @@ public class SudokuView extends BorderPane {
     private static void configureFileChooser(final FileChooser fileChooser){
         fileChooser.setTitle("View Pictures");
 
-       
-        fileChooser.setInitialDirectory(
-                new File(System.getProperty("user.home"))
-        );
+        File dir = new File(System.getProperty("user.home"), "/labb4_spara");
+        if (! dir.exists()) {
+            dir.mkdirs();
+        }
+
+        fileChooser.setInitialDirectory(dir);
     }
 
 
