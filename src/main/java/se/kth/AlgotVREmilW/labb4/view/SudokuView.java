@@ -257,7 +257,7 @@ public class SudokuView extends BorderPane {
         }
     }
     private static void configureFileChooser(final FileChooser fileChooser){
-        File dir = new File(System.getProperty("user.home"), "/labb4_spara");
+        File dir = new File(System.getProperty("user.home"), "/labb4_spara");  //öppnar en specifik mapp (directory)
         if (! dir.exists()) {
             dir.mkdirs();
         }
