@@ -239,9 +239,10 @@ public class SudokuView extends BorderPane {
         FileChooser fileChooser = new FileChooser();
         Stage stage = new Stage();
         fileChooser.setTitle("Save File");
-
+        configureFileChooser(fileChooser);
         File file = fileChooser.showSaveDialog(stage);
         if(file!=null){
+
             facade.saveFile(file);
         }
     }
@@ -249,12 +250,20 @@ public class SudokuView extends BorderPane {
         FileChooser fileChooser = new FileChooser();
         Stage stage = new Stage();
         fileChooser.setTitle("Load file");
+        configureFileChooser(fileChooser);  //så att man hamnar på förutbestämt directory
         File file = fileChooser.showOpenDialog(stage);
         if(file!=null){
             facade.loadFile(file);
         }
     }
+    private static void configureFileChooser(final FileChooser fileChooser){
+        fileChooser.setTitle("View Pictures");
 
+       
+        fileChooser.setInitialDirectory(
+                new File(System.getProperty("user.home"))
+        );
+    }
 
 
 //----------------event handlers-----------------
@@ -295,6 +304,10 @@ public class SudokuView extends BorderPane {
 
         EventHandler<ActionEvent> rulesItemHandler = actionEvent -> controller.handleRulesItem();
         rulesItem.addEventHandler(ActionEvent.ACTION, rulesItemHandler);
+
+        EventHandler<ActionEvent> exitItemHandler = actionEvent -> controller.handleExitItem();
+        exitItem.addEventHandler(ActionEvent.ACTION, exitItemHandler);
+
 
 
         EventHandler<ActionEvent> saveGameItemHandler = actionEvent -> {

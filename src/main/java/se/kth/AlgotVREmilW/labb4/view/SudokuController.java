@@ -41,6 +41,10 @@ public class SudokuController {
         view.updateAllTiles();
     }
 
+    public void handleExitItem(){
+        System.exit(0);
+    }
+
     public void handleRulesItem(){
         view.showAlert(
                 "The objective is to fill a 9 × 9 grid with digits \n" +
