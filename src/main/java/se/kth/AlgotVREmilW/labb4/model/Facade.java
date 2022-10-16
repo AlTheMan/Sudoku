@@ -93,6 +93,9 @@ public class Facade {
         sudokuTiles[x][y].changeStateOnTile(inputNr);
         return true;
     }
+    public SudokuLevel getDifficulty(){
+        return  difficulty;
+    }
 
     public boolean checkLegalMove(int x, int y, int inputNr ){
         //TODO: kolla om inputNr==0 behövs kollas

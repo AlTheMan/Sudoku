@@ -24,17 +24,23 @@ public class SudokuController {
 
     }
 
+    public void handleNewGameItem(){
+        facade.changeDifficulty(facade.getDifficulty());
+        view.setColorsForNumbers();
+        view.updateAllTiles();
+    }
+
     public void handleHintButton() {
-        /*int[] addHint = facade.getHint();
+        int[] addHint = facade.getHint();
         if(facade.updateGame(addHint[0], addHint[1], addHint[2])){
-            view.updateGameBoard();
+            //view.setColorsForNumbers();
+            view.updateAllTiles();
         }
         if(facade.checkIfGameIsSolved()) {
             view.showAlert("Congratulations!");
-        }*/
-        facade.changeDifficulty(SudokuUtilities.SudokuLevel.MEDIUM);
-        view.setColorsForNumbers();
-        view.updateAllTiles();
+        }
+        //facade.changeDifficulty(SudokuUtilities.SudokuLevel.MEDIUM);
+        //view.updateAllTiles();
 
     }
 

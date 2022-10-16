@@ -174,7 +174,7 @@ public class SudokuView extends BorderPane {
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 if(!facade.getIfSudokuStartNr(i, j)) {
-                    numberTiles[i][j].setStyle("-fx-border-color: black; -fx-text-fill: blue; -fx-border-width: 0.5px;");
+                    numberTiles[i][j].setStyle("-fx-border-color: black; -fx-text-fill: grey; -fx-border-width: 0.5px;");
                 }
                 else {
                     numberTiles[i][j].setStyle("-fx-border-color: black; -fx-text-fill: black; -fx-border-width: 0.5px;");
@@ -259,6 +259,9 @@ public class SudokuView extends BorderPane {
         EventHandler<ActionEvent> hardItemHandler = actionEvent -> controller.handleHardItem();
         hardItem.addEventHandler(ActionEvent.ACTION, hardItemHandler);
 
+
+        EventHandler<ActionEvent> newGameItem = actionEvent -> controller.handleNewGameItem();
+        newItem.addEventHandler(ActionEvent.ACTION, newGameItem);
 
 
 
