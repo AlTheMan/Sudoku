@@ -24,10 +24,25 @@ public class SudokuController {
 
     }
 
+    public void handleSaveGameItem(){
+
+    }
+
+    public void handleLoadGameItem(){
+
+    }
+
     public void handleNewGameItem(){
         facade.changeDifficulty(facade.getDifficulty());
         view.setColorsForNumbers();
         view.updateAllTiles();
+    }
+
+    public void handleRulesItem(){
+        view.showAlert(
+                "The objective is to fill a 9 × 9 grid with digits \n" +
+                "so that each column, each row, and each of the nine 3 × 3 subgrids \n" +
+                "that compose the grid contain all of the digits from 1 to 9.");
     }
 
     public void handleHintButton() {

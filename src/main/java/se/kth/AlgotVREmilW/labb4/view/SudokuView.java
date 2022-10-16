@@ -35,6 +35,11 @@ public class SudokuView extends BorderPane {
     private MenuItem easyItem;
     private MenuItem mediumItem;
     private MenuItem hardItem;
+    private MenuItem rulesItem;
+    private MenuItem saveGameItem;
+    private MenuItem loadGameItem;
+    private MenuItem exitItem;
+
 
     public SudokuView(Facade facade){
         super();
@@ -57,9 +62,9 @@ public class SudokuView extends BorderPane {
     private void addMenu(){
         // menu compontents
         Menu fileMenu = new Menu("File");
-        MenuItem loadGameItem = new MenuItem("Load Game");
-        MenuItem saveGameItem = new MenuItem("Save Game");
-        MenuItem exitItem = new MenuItem("Exit");
+        loadGameItem = new MenuItem("Load Game");
+        saveGameItem = new MenuItem("Save Game");
+        exitItem = new MenuItem("Exit");
         fileMenu.getItems().addAll(loadGameItem, saveGameItem, exitItem);
 
         //menu component
@@ -73,7 +78,7 @@ public class SudokuView extends BorderPane {
         Menu helpMenu = new Menu("Help");
         clearItem = new MenuItem("Clear game");
         checkItem = new MenuItem("Check if numbers are correct");
-        MenuItem rulesItem = new MenuItem("rules");
+        rulesItem = new MenuItem("rules");
         helpMenu.getItems().addAll(clearItem,checkItem,rulesItem);
 
 
@@ -260,10 +265,18 @@ public class SudokuView extends BorderPane {
         hardItem.addEventHandler(ActionEvent.ACTION, hardItemHandler);
 
 
-        EventHandler<ActionEvent> newGameItem = actionEvent -> controller.handleNewGameItem();
-        newItem.addEventHandler(ActionEvent.ACTION, newGameItem);
+        EventHandler<ActionEvent> newGameItemHandler = actionEvent -> controller.handleNewGameItem();
+        newItem.addEventHandler(ActionEvent.ACTION, newGameItemHandler);
+
+        EventHandler<ActionEvent> rulesItemHandler = actionEvent -> controller.handleRulesItem();
+        rulesItem.addEventHandler(ActionEvent.ACTION, rulesItemHandler);
 
 
+        EventHandler<ActionEvent> saveGameItemHandler = actionEvent -> controller.handleSaveGameItem();
+        saveGameItem.addEventHandler(ActionEvent.ACTION, saveGameItemHandler);
+
+        EventHandler<ActionEvent> loadGameItemHandler = actionEvent -> controller.handleLoadGameItem();
+        loadGameItem.addEventHandler(ActionEvent.ACTION, loadGameItemHandler);
 
         EventHandler<MouseEvent> tileCLickHandler = new EventHandler<MouseEvent>() {
             @Override
