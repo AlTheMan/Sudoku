@@ -136,8 +136,8 @@ public class Facade {
             return !sudokuTiles[x][y].getIfStartNr();         //så att man inte kan placera på startvärden
         }
         for(int i =0; i<GRID_SIZE; i++){
-            if (model.getGameNr(i, y) == inputNr) return false;
-            if (model.getGameNr(x, i) == inputNr) return false;
+            if (gameState[i][y] == inputNr) return false;
+            if (gameState[x][i] == inputNr) return false;
         }
 
         //kollar om det finns samma siffra i samma ruta:
@@ -148,8 +148,8 @@ public class Facade {
         int modY= y%3;
         for(int i=0; i<SECTION_SIZE; i++){
             for(int j=0; j<SECTION_SIZE; j++){
-                if(model.getGameNr(x-modX+i, y-modY+j) == inputNr) return false;
-                if(model.getGameNr(x-modX+j, y-modY+i) == inputNr) return false;
+                if(gameState[x-modX+i][y-modY+j] == inputNr) return false;
+                if(gameState[x-modX+j][y-modY+j] == inputNr) return false;
             }
         }
 
