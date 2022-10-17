@@ -24,7 +24,6 @@ public class Facade {
         return model.getSudokuString(x, y);
     }
     public boolean getIfSudokuStartNr(int x, int y) {
-
         return model.getIfSudokuStartNumber(x, y);
     }
 
@@ -39,7 +38,6 @@ public class Facade {
         for(int i =0; i<GRID_SIZE; i++){
             for(int j=0; j<GRID_SIZE; j++){
                 model.setGameNr(i, j, model.getGameAtStartNumber(i, j));
-                //sudokuTiles[i][j].changeStateOnTile(model.getGameAtStartNumber(i, j));
             }
         }
     }
@@ -63,7 +61,7 @@ public class Facade {
         for (int i = 0; i < GRID_SIZE; i++){
             for (int j = 0; j < GRID_SIZE; j++){
                 if(gameState[i][j] != 0){
-                    if(model.getSudokuMatrix(i, j, 0) != model.getSudokuMatrix(i, j, 1)) return false;
+                    if(!model.compareSudokuMatrix(i, j)) return false;
                 }
             }
         }
@@ -78,7 +76,7 @@ public class Facade {
     public boolean checkIfGameIsSolved(){
         for(int i=0; i<GRID_SIZE; i++){
             for(int j=0; j<GRID_SIZE; j++){
-                if(model.getSudokuMatrix(i, j,0) != model.getSudokuMatrix(i, j, 1)) return false;  //man kan också bara kolla om game[i][j][0]!=0, eftersom varje input ska vara laglig
+                if(!model.compareSudokuMatrix(i, j)) return false;  //man kan också bara kolla om game[i][j][0]!=0, eftersom varje input ska vara laglig
             }
         }
         return true;
@@ -97,10 +95,10 @@ public class Facade {
         while(true){
             int nr1= random.nextInt(9);
             int nr2= random.nextInt(9);
-            if(model.getSudokuMatrix(nr1, nr2, 0)!=model.getSudokuMatrix(nr1, nr2, 1)){
+            if(!model.compareSudokuMatrix(nr1, nr2)){
                 hintNr[0] = nr1;                    //x-värdet
                 hintNr[1] = nr2;                    //y-värdet
-                hintNr[2] = model.getSudokuMatrix(nr1, nr2, 1);      //vilken siffra på positionen
+                hintNr[2] = model.getACorrectNumber(nr1, nr2);      //vilken siffra på positionen
                 return hintNr;
             }
         }
@@ -118,7 +116,6 @@ public class Facade {
             return false; //Todo: throws new Exception(); //ska kasta exception
         }
         model.setGameNr(x, y, inputNr);
-        //sudokuTiles[x][y].changeStateOnTile(inputNr);
         return true;
     }
     public SudokuLevel getDifficulty(){

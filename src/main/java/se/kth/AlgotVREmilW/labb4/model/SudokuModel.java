@@ -105,17 +105,26 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
         }
     }
 
+        /**
+         * Compares the numbers dimensionally between the matrices
+         * @param x row
+         * @param y column
+         * @return true if equal
+         */
+
+    public boolean compareSudokuMatrix(int x, int y) {
+        return (game[x][y][0] == game[x][y][1]);
+    }
+
 
         /**
-         * Returns a 3d array with either the solution or current state of the game
-         * depending on which depth specified.
+         * Returns a correct number from the solution matrix
          * @param row specified row
          * @param col specified column
-         * @param depth 0 indicates user-inputed numbers and initial starting-numbers. 1 indicates the array used for the solution
-         * @return
+         * @return a correct number for the sudoku array.
          */
-    public int getSudokuMatrix(int row, int col, int depth) {
-        return game[row][col][depth];
+    public int getACorrectNumber(int row, int col) {
+        return game[row][col][1];
     }
 
         /**
