@@ -1,7 +1,5 @@
 package se.kth.AlgotVREmilW.labb4.model;
 
-import java.util.Random;
-
 import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
     class SudokuModel {
     private int[][][] game;
@@ -124,8 +122,13 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * returns an array of current state of the game
          * @return
          */
-    public SudokuTile[][] getSudokuTiles(){
-        return sudokuTiles;
+
+    public String getSudokuString(int x, int y){
+        return sudokuTiles[x][y].getNumString();
+    }
+
+    public boolean getIfSudokuStartNumber(int x, int y) {
+        return sudokuTiles[x][y].getIfStartNr();
     }
 
         /**
@@ -146,6 +149,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          */
     public void setGameNr(int x, int y, int value){
         game[x][y][0] = value;
+        sudokuTiles[x][y].changeStateOnTile(value);
         updateFacadeGameState();
     }
 

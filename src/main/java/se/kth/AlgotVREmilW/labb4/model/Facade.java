@@ -13,20 +13,19 @@ public class Facade {
 
     int[][] gameState;
     private final SudokuModel model;
-    private final SudokuTile[][] sudokuTiles;
     private SudokuLevel difficulty;
     public Facade() {
         this.difficulty = SudokuLevel.EASY;
         this.model = new SudokuModel(difficulty, this);
         gameState = model.makeGameAtStartCopy();
-        sudokuTiles = model.getSudokuTiles();
     }
 
     public String getSudokuString(int x, int y){
-        return sudokuTiles[x][y].getNumString();
+        return model.getSudokuString(x, y);
     }
     public boolean getIfSudokuStartNr(int x, int y) {
-        return sudokuTiles[x][y].getIfStartNr();
+
+        return model.getIfSudokuStartNumber(x, y);
     }
 
     /**
@@ -36,7 +35,7 @@ public class Facade {
         for(int i =0; i<GRID_SIZE; i++){
             for(int j=0; j<GRID_SIZE; j++){
                 model.setGameNr(i, j, model.getGameAtStartNumber(i, j));
-                sudokuTiles[i][j].changeStateOnTile(model.getGameAtStartNumber(i, j));
+                //sudokuTiles[i][j].changeStateOnTile(model.getGameAtStartNumber(i, j));
             }
         }
     }
@@ -115,7 +114,7 @@ public class Facade {
             return false; //Todo: throws new Exception(); //ska kasta exception
         }
         model.setGameNr(x, y, inputNr);
-        sudokuTiles[x][y].changeStateOnTile(inputNr);
+        //sudokuTiles[x][y].changeStateOnTile(inputNr);
         return true;
     }
     public SudokuLevel getDifficulty(){
@@ -131,7 +130,7 @@ public class Facade {
      */
     public boolean checkLegalMove(int x, int y, int inputNr ){
         if(inputNr == 0) {      // Checks if the player tries to clear a start number.
-            return !sudokuTiles[x][y].getIfStartNr();
+            return !model.getIfSudokuStartNumber(x, y);
         }
         for(int i =0; i<GRID_SIZE; i++){    // Checks if the number that is being placed already is in the row or column
             if (model.getGameNr(i, y) == inputNr) return false;
