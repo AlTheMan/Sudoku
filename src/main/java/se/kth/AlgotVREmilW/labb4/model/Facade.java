@@ -112,8 +112,7 @@ public class Facade {
      */
     public boolean updateGame(int x, int y, int inputNr ){
         if(!checkLegalMove(x,y,inputNr)) {
-            System.out.println("Illegal move"); //TODO: detta måste tas bort
-            return false; //throws new Exception(); //ska kasta exception
+            return false; //Todo: throws new Exception(); //ska kasta exception
         }
         model.setGameNr(x, y, inputNr);
         sudokuTiles[x][y].changeStateOnTile(inputNr);
@@ -131,16 +130,15 @@ public class Facade {
      * @return true if the move is legal
      */
     public boolean checkLegalMove(int x, int y, int inputNr ){
-        //TODO: kolla om inputNr==0 behövs kollas
-        if(inputNr==0){
-            return !sudokuTiles[x][y].getIfStartNr();         //så att man inte kan placera på startvärden
+        if(inputNr == 0) {      // Checks if the player tries to clear a start number.
+            return !sudokuTiles[x][y].getIfStartNr();
         }
-        for(int i =0; i<GRID_SIZE; i++){
+        for(int i =0; i<GRID_SIZE; i++){    // Checks if the number that is being placed already is in the row or column
             if (model.getGameNr(i, y) == inputNr) return false;
             if (model.getGameNr(x, i) == inputNr) return false;
         }
 
-        //kollar om det finns samma siffra i samma ruta:
+        //kollar om det finns samma siffra i samma 3x3 ruta:
         //om man har position [8][0], så blir mod3 av 8 = 2.
         //då räknar man 8-2 för att få startindex, alltså
         // börjar man leta på index [6][0] och letar fram 3 rutor i vardera håll.
@@ -166,8 +164,6 @@ public class Facade {
         serializeToFile(file, state);
     }
 
-
-    //TODO: hantera exception
     /**
      * Loads file from file. Can only load .Sudoku-files (but Sudoku view is controlling that though)
      * @param file specified file to load

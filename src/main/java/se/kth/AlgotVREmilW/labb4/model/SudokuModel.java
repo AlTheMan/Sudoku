@@ -94,7 +94,8 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
                 if(sudokuTiles[i][j] == null){
                     sudokuTiles[i][j] = new SudokuTile();
                 }
-                sudokuTiles[i][j].setVisible(false);
+                sudokuTiles[i][j].setNumber(game[i][j][1]);
+                sudokuTiles[i][j].setVisible(false);        // Resets the values if a new game is generated.
                 sudokuTiles[i][j].setIfStartNr(false);
                 if(gameAtStartCopy[i][j] != 0){
                     sudokuTiles[i][j].setIfStartNr(true);
@@ -102,7 +103,6 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
                 if(game[i][j][0] != 0) {
                     sudokuTiles[i][j].setVisible(true);
                 }
-                sudokuTiles[i][j].setNumber(game[i][j][1]);
             }
         }
     }

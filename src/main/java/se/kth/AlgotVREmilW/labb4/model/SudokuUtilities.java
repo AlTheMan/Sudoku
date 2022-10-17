@@ -140,9 +140,10 @@ public class SudokuUtilities {
 
     /**
      * Randomizes two numbers between 1-9 to switch with each other.
+     * Also randomizes if the game board should be mirrored in any direction.
      * Changes both the player board and the solution board.
      */
-    public static void randomizeGameBoard(int[][][] game) { //TODO: Ska göras static och flyttas till SudokuUtil
+    public static void randomizeGameBoard(int[][][] game) {
         Random rand = new Random();
         int rand1 = rand.nextInt(GRID_SIZE) + 1;
         int rand2 = rand1;
@@ -168,6 +169,8 @@ public class SudokuUtilities {
                 }
             }
         }
+
+        // Randomizes if the game should be inverted, both horizontal and vertical
         rand1 = rand.nextInt(2);
         rand2 = rand.nextInt(2);
         if (rand1 == 1) reverseVertical(game);
