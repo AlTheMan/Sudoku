@@ -1,5 +1,7 @@
 package se.kth.AlgotVREmilW.labb4.model;
 
+import java.util.Random;
+
 public class SudokuUtilities {
 
     public enum SudokuLevel {EASY, MEDIUM, HARD}
@@ -133,4 +135,74 @@ public class SudokuUtilities {
                     "693452781" +
                     "154873269" +
                     "728196453";
+
+
+    public static void randomizeGameBoard(int[][][] game) { //TODO: Ska göras static och flyttas till SudokuUtil
+        Random rand = new Random();
+        int rand1 = rand.nextInt(GRID_SIZE) + 1;
+        int rand2 = rand1;
+        while(rand2 == rand1){      // Makes sure the numbers aren't the same
+            rand2 = rand.nextInt(GRID_SIZE) + 1;
+        }
+
+        // The two random numbers swaps places
+
+        for (int i = 0; i < GRID_SIZE; i++){
+            for (int j = 0; j < GRID_SIZE; j++) {
+                if (game[i][j][1] == rand1) {
+                    game[i][j][1] = rand2;
+                    if(game[i][j][0] != 0) {
+                        game[i][j][0] = rand2;
+                    }
+                }
+                else if(game[i][j][1] == rand2) {
+                    game[i][j][1] = rand1;
+                    if(game[i][j][0] != 0) {
+                        game[i][j][0] = rand1;
+                    }
+                }
+            }
+        }
+        rand1 = rand.nextInt(2);
+        rand2 = rand.nextInt(2);
+        if (rand1 == 1) reverseVertical(game);
+        if (rand2 == 1) reverseHorizontal(game);
+    }
+    private static void reverseHorizontal(int[][][] game) {
+        int[] tmpUnsolved = new int[9];
+        int[] tmpSolved = new int[9];
+
+        for (int i = 0; i < GRID_SIZE; i++) {
+            int size = 0;
+            for (int j = GRID_SIZE - 1; j >= 0; j--) {
+                tmpUnsolved[size] = game[i][j][0];
+                tmpSolved[size] = game[i][j][1];
+                size++;
+            }
+            for (int j = 0; j < GRID_SIZE; j++) {
+                game[i][j][0] = tmpUnsolved[j];
+                game[i][j][1] = tmpSolved[j];
+            }
+        }
+    }
+
+    private static void reverseVertical(int[][][] game){
+        int[] tmpUnsolved = new int[9];
+        int[] tmpSolved = new int[9];
+
+        for (int i = 0; i < GRID_SIZE; i++) {
+            int size = 0;
+            for (int j = GRID_SIZE - 1; j >= 0; j--) {
+                tmpUnsolved[size] = game[j][i][0];
+                tmpSolved[size] = game[j][i][1];
+                size++;
+            }
+            for (int j = 0; j < GRID_SIZE; j++) {
+                game[j][i][0] = tmpUnsolved[j];
+                game[j][i][1] = tmpSolved[j];
+            }
+        }
+    }
+
+
 }
