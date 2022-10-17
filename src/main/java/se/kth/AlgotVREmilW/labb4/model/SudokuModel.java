@@ -13,7 +13,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
         this.facade = facade;
         sudokuTiles = new SudokuTile[GRID_SIZE][GRID_SIZE];
         this.game = generateSudokuMatrix(sudokuLevel);
-        randomizeGameBoard();
+        randomizeGameBoard(game);
         gameAtStartCopy = new int[GRID_SIZE][GRID_SIZE];
         makeGameAtStartCopy();
         createSudokuTiles();
@@ -40,7 +40,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          */
     public void changeDifficulty(SudokuLevel difficulty) {
         this.game = generateSudokuMatrix(difficulty);
-        randomizeGameBoard();
+        randomizeGameBoard(game);
         makeGameAtStartCopy();
         createSudokuTiles();
         updateFacadeGameState();
@@ -171,107 +171,5 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
             }
         }
         return gameAtStartCopy;
-    }
-
-        //TODO: göra psuedorandom generering för spelplanen
-    // updatera oxå gameCopy
-
-    /**
-     * Randomizes two numbers between 1-9 to switch with each other.
-     * Changes both the player board and the solution board.
-     */
-    public void randomizeGameBoard() { //TODO: Ska göras static och flyttas till SudokuUtil
-        Random rand = new Random();
-        int rand1 = rand.nextInt(GRID_SIZE) + 1;
-        int rand2 = rand1;
-        while(rand2 == rand1){      // Makes sure the numbers aren't the same
-            rand2 = rand.nextInt(GRID_SIZE) + 1;
-        }
-
-        // The two random numbers swaps places
-
-        for (int i = 0; i < GRID_SIZE; i++){
-            for (int j = 0; j < GRID_SIZE; j++) {
-                if (game[i][j][1] == rand1) {
-                    game[i][j][1] = rand2;
-                    if(game[i][j][0] != 0) {
-                        game[i][j][0] = rand2;
-                    }
-                }
-                else if(game[i][j][1] == rand2) {
-                    game[i][j][1] = rand1;
-                    if(game[i][j][0] != 0) {
-                        game[i][j][0] = rand1;
-                    }
-                }
-            }
-        }
-        rand1 = rand.nextInt(2);
-        rand2 = rand.nextInt(2);
-        if (rand1 == 1) reverseVertical();
-        if (rand2 == 1) reverseHorizontal();
-    }
-
-    public void reverseHorizontal() {
-        int[] tmpUnsolved = new int[9];
-        int[] tmpSolved = new int[9];
-
-        for (int i = 0; i < GRID_SIZE; i++) {
-            int size = 0;
-            for (int j = GRID_SIZE - 1; j >= 0; j--) {
-                tmpUnsolved[size] = game[i][j][0];
-                tmpSolved[size] = game[i][j][1];
-                size++;
-            }
-            for (int j = 0; j < GRID_SIZE; j++) {
-                game[i][j][0] = tmpUnsolved[j];
-                game[i][j][1] = tmpSolved[j];
-            }
-        }
-    }
-
-
-    public void reverseVertical(){
-        int[] tmpUnsolved = new int[9];
-        int[] tmpSolved = new int[9];
-
-        for (int i = 0; i < GRID_SIZE; i++) {
-            int size = 0;
-            for (int j = GRID_SIZE - 1; j >= 0; j--) {
-                tmpUnsolved[size] = game[j][i][0];
-                tmpSolved[size] = game[j][i][1];
-                size++;
-            }
-            for (int j = 0; j < GRID_SIZE; j++) {
-                game[j][i][0] = tmpUnsolved[j];
-                game[j][i][1] = tmpSolved[j];
-            }
-        }
-    }
-
-
-    @Override
-    public String toString() {
-
-        String info="";
-        for(int i =0; i<GRID_SIZE; i++){
-            for(int j=0; j<GRID_SIZE; j++){
-                info+= String.valueOf(game[i][j][0]);
-                info+= " ";
-            }
-            info+="\n";
-        }
-
-        info += "\n";
-
-        for(int i =0; i<GRID_SIZE; i++){
-            for(int j=0; j<GRID_SIZE; j++){
-                info+= String.valueOf(game[i][j][1]);
-                info+= " ";
-            }
-            info+="\n";
-        }
-
-        return info;
     }
 }
