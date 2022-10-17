@@ -27,7 +27,6 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.SECTIONS_PER_ROW;
 
 public class SudokuView extends BorderPane {
     private Label[][] numberTiles; // the tiles/squares to show in the ui grid
-    private TilePane numberPane;
     private TilePane gridView;
     private Facade facade;
     private Button[] numberButton;
@@ -143,9 +142,7 @@ public class SudokuView extends BorderPane {
 
 
     //------------grid view --------------------
-    public TilePane getPane(){
-        return numberPane;
-    }
+
     // called by constructor (only)
     private final void initNumberTiles() {
         Font font = Font.font("Monospaced", FontWeight.BOLD, 20);
@@ -229,10 +226,6 @@ public class SudokuView extends BorderPane {
 
     public Label getNumberTiles(int row, int col) {
         return numberTiles[row][col];
-    }
-
-    public Label[][] getNumberTilesArr(){
-        return numberTiles;
     }
 
     public void saveFile()  throws IOException {

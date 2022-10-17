@@ -11,7 +11,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SaveAndLoadFile.*;
  */
 public class Facade {
 
-    int[][] gameState;
+    private int[][] gameState;
     private final SudokuModel model;
     private SudokuLevel difficulty;
     public Facade() {
@@ -26,6 +26,10 @@ public class Facade {
     public boolean getIfSudokuStartNr(int x, int y) {
 
         return model.getIfSudokuStartNumber(x, y);
+    }
+
+    public void setGameState(int[][] gameState) {
+        this.gameState = gameState;
     }
 
     /**

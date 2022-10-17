@@ -29,7 +29,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
                 gameState[i][j] = game[i][j][0];
             }
         }
-        facade.gameState = gameState;
+        facade.setGameState(gameState);
     }
 
         /**
