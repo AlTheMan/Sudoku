@@ -64,7 +64,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
     }
 
         /**
-         * returns a copy of game at initial positions (before a user has inputted any numbers)
+         * returns a copy of game at initial positions (before a user has input any numbers)
          * @return array of the game-state at starting positions.
          */
     public int[][] getGameAtStartCopy() {
@@ -73,7 +73,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 
         /**
          * Updates the initial game-states starting positions (before users
-         * have inputed any numbers). I.e updates the starting-numbers.
+         * have input any numbers). I.e updates the starting-numbers.
          * is used when loading game from file.
          * @param gameAtStartCopy the array used to keep track of starting-numbers.
          */
@@ -83,7 +83,8 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 
 
         /**
-         * Creates a 2d array of SudokuTile:
+         * Creates a 9x9 array of SudokuTiles:
+         * If the array is alreade created it just updates the values.
          * SudokuTile[][]
          */
     public void createSudokuTiles() {
@@ -118,33 +119,39 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 
 
         /**
-         * Returns a correct number from the solution matrix
          * @param row specified row
          * @param col specified column
-         * @return a correct number for the sudoku array.
+         * @return a correct number from the solution matrix
          */
     public int getACorrectNumber(int row, int col) {
         return game[row][col][1];
     }
 
+
         /**
-         * returns an array of current state of the game
-         * @return
+         * @param x row
+         * @param y column
+         * @return a string value of the sudoku number at (x,y) position
          */
 
     public String getSudokuString(int x, int y){
         return sudokuTiles[x][y].getNumString();
     }
 
+        /**
+         *
+         * @param x row
+         * @param y column
+         * @return true if the number at (x,y) is a start number.
+         */
     public boolean getIfSudokuStartNumber(int x, int y) {
         return sudokuTiles[x][y].getIfStartNr();
     }
 
         /**
-         * Returns the value at specified row and column
          * @param x specified row
          * @param y specified column
-         * @return
+         * @return the value at specified row and column
          */
     public int getGameNr(int x, int y){
         return game[x][y][0];
@@ -152,21 +159,22 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
 
         /**
          * sets a value at specified row and column
+         * updates the specific tile in the sudoku-tilearray
+         * also updates the game state array in the facade class
          * @param x specified row
          * @param y specified column
          * @param value what number to set on position
          */
-    public void setGameNr(int x, int y, int value){
+    public void setGameData(int x, int y, int value){
         game[x][y][0] = value;
         sudokuTiles[x][y].changeStateOnTile(value);
         updateFacadeGameState();
     }
 
         /**
-         * returns the value at specified row and columnat at games initial positions
          * @param x specified row
          * @param y specified column
-         * @return
+         * @return the value at specified row and column at games initial positions
          */
     public int getGameAtStartNumber(int x, int y) {
         return gameAtStartCopy[x][y];

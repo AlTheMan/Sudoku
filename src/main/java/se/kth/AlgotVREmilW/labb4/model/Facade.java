@@ -37,7 +37,7 @@ public class Facade {
     public void clearGame(){
         for(int i =0; i<GRID_SIZE; i++){
             for(int j=0; j<GRID_SIZE; j++){
-                model.setGameNr(i, j, model.getGameAtStartNumber(i, j));
+                model.setGameData(i, j, model.getGameAtStartNumber(i, j));
             }
         }
     }
@@ -115,7 +115,7 @@ public class Facade {
         if(!checkLegalMove(x,y,inputNr)) {
             return false; //Todo: throws new Exception(); //ska kasta exception
         }
-        model.setGameNr(x, y, inputNr);
+        model.setGameData(x, y, inputNr);
         return true;
     }
     public SudokuLevel getDifficulty(){

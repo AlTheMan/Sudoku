@@ -55,7 +55,7 @@ class SudokuTile {
     /**
      * Sets the number to be a "start-number" i.e. a number that's initialized from the start
      * A computer-generated number is a start-number.
-     * A user inputed number is not a start-number
+     * A user input number is not a start-number
      * @param startNumber true if Tile should be a start-number.
      */
     public void setIfStartNr(boolean startNumber) {
@@ -63,8 +63,8 @@ class SudokuTile {
     }
 
     /**
-     * returns if the Tile is a start-number, i.e if the number was NOT inputed by a user.
-     * @return true if Tile is a start-number. False if it was inputed by a user.
+     * returns if the Tile is a start-number, i.e if the number was NOT input by a user.
+     * @return true if Tile is a start-number. False if it was input by a user.
      */
     public boolean getIfStartNr() {
         return isStartNumber;
