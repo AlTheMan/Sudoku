@@ -10,7 +10,12 @@ class SudokuTile {
         isVisible = false;
     }
 
-    public SudokuTile(int number, boolean isVisible) {
+    /**
+     *
+     * @param number
+     * @param isVisible sets if the tile should be visible at start or not
+     */
+    SudokuTile(int number, boolean isVisible) {
         this.isVisible = isVisible;
         this.numString = String.valueOf(number);
     }
@@ -20,7 +25,7 @@ class SudokuTile {
      * Sets the number of the Tile
      * @param number
      */
-    public void setNumber(int number) {
+    void setNumber(int number) {
         this.numString = String.valueOf(number);
     }
 
@@ -29,7 +34,7 @@ class SudokuTile {
      * if the number is =0, then sets the tile to be invisible
      * @param number what value the tile should have
      */
-    public void changeStateOnTile(int number) {
+    void changeStateOnTile(int number) {
         setNumber(number);
         isVisible = (number != 0);
     }

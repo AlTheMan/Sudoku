@@ -20,7 +20,7 @@ public class SudokuUtilities {
      * @throws IllegalArgumentException if the length of stringRepresentation is not 2*81 characters and
      *                                  for characters other than '0'-'9'.
      */
-    public static int[][][] generateSudokuMatrix(SudokuLevel level) {
+    static int[][][] generateSudokuMatrix(SudokuLevel level) {
         String representationString;
         switch (level) {
             case EASY: representationString = easy; break;
@@ -143,7 +143,7 @@ public class SudokuUtilities {
      * Also randomizes if the game board should be mirrored in any direction.
      * Changes both the player board and the solution board.
      */
-    public static void randomizeGameBoard(int[][][] game) {
+    static void randomizeGameBoard(int[][][] game) {
         Random rand = new Random();
         int rand1 = rand.nextInt(GRID_SIZE) + 1;
         int rand2 = rand1;
@@ -179,6 +179,10 @@ public class SudokuUtilities {
 
 
 
+    /**
+     * reverses the order of the SudokuMatrix on the horisontal axis
+     * @param game
+     */
     private static void reverseHorizontal(int[][][] game) {
         int[] tmpUnsolved = new int[9];
         int[] tmpSolved = new int[9];
@@ -197,7 +201,10 @@ public class SudokuUtilities {
         }
     }
 
-
+    /**
+     * reverses the order of the SudokuMatrix on the vertical axis
+     * @param game
+     */
     private static void reverseVertical(int[][][] game){
         int[] tmpUnsolved = new int[9];
         int[] tmpSolved = new int[9];
