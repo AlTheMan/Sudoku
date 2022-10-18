@@ -4,14 +4,14 @@ package se.kth.AlgotVREmilW.labb4.model;
 import java.io.*;
 import java.util.List;
 
-public class SaveAndLoadFile {
+class SaveAndLoadFile {
 
     /**
      * Call this method before the application exits, to store the users and projects,
      * in serialized form.
      */
 
-    public static void serializeToFile(File file, SaveState state) throws IOException {
+    static void serializeToFile(File file, SaveState state) throws IOException {
         // ...
         ObjectOutputStream output = null;
 
@@ -32,7 +32,7 @@ public class SaveAndLoadFile {
      * from file the specified file.
      */
 
-    public static SaveState deSerializeFromFile(File file) throws IOException, ClassNotFoundException {
+    static SaveState deSerializeFromFile(File file) throws IOException, ClassNotFoundException {
         // ...
         SaveState state = new SaveState();
         ObjectInputStream input = null;

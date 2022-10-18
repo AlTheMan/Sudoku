@@ -5,25 +5,31 @@ import java.io.Serializable;
 /**
  * Is used to save the state of the game via SaveAndLoadFile
  */
-public class SaveState implements Serializable {
+class SaveState implements Serializable {
 
     private int[][][] game;
     private int[][] beginningState;
 
 
-    public SaveState(){
+    SaveState(){
 
     }
-    public SaveState(int[][][] game, int[][] beginningState){
+
+    /**
+     * Copiesthe game array  and game-at-beginning array to internal class objects
+     * @param game
+     * @param beginningState
+     */
+    SaveState(int[][][] game, int[][] beginningState){
         this.game = game;
         this.beginningState = beginningState;
     }
 
-    public int[][][] getGame() {
+    int[][][] getGame() {
         return game;
     }
 
-    public int[][] getBeginningState() {
+    int[][] getBeginningState() {
         return beginningState;
     }
 }

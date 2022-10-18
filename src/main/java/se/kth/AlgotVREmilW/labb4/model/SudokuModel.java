@@ -7,7 +7,12 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
     private SudokuTile[][] sudokuTiles;
     private Facade facade;
 
-    public SudokuModel(SudokuLevel sudokuLevel, Facade facade) {
+        /**
+         * Creates model with input SudokuLevel difficulty set
+         * @param sudokuLevel
+         * @param facade
+         */
+    SudokuModel(SudokuLevel sudokuLevel, Facade facade) {
         this.facade = facade;
         sudokuTiles = new SudokuTile[GRID_SIZE][GRID_SIZE];
         this.game = generateSudokuMatrix(sudokuLevel);

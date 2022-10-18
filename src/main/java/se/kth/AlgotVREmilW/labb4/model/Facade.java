@@ -14,6 +14,10 @@ public class Facade {
     private int[][] gameState;
     private final SudokuModel model;
     private SudokuLevel difficulty;
+
+    /**
+     * Creates model with difficulty set to EASY
+     */
     public Facade() {
         this.difficulty = SudokuLevel.EASY;
         this.model = new SudokuModel(difficulty, this);

@@ -6,7 +6,7 @@ class SudokuTile {
     private boolean isVisible;
     private boolean isStartNumber;
 
-    public SudokuTile(){
+    SudokuTile(){
         isVisible = false;
     }
 
@@ -44,7 +44,7 @@ class SudokuTile {
      * if the tile is invisible, the string "" is returned.
      * @return
      */
-    public String getNumString() {
+    String getNumString() {
         if (isVisible) return numString;
         else return "";
     }
@@ -53,7 +53,7 @@ class SudokuTile {
      * Sets the tile to be visible or not
      * @param visible true if the tile should be visible. False otherwise
      */
-    public void setVisible(boolean visible) {
+    void setVisible(boolean visible) {
         isVisible = visible;
     }
 
@@ -63,7 +63,7 @@ class SudokuTile {
      * A user input number is not a start-number
      * @param startNumber true if Tile should be a start-number.
      */
-    public void setIfStartNr(boolean startNumber) {
+    void setIfStartNr(boolean startNumber) {
         this.isStartNumber = startNumber;
     }
 
@@ -71,7 +71,7 @@ class SudokuTile {
      * returns if the Tile is a start-number, i.e if the number was NOT input by a user.
      * @return true if Tile is a start-number. False if it was input by a user.
      */
-    public boolean getIfStartNr() {
+    boolean getIfStartNr() {
         return isStartNumber;
     }
 }
