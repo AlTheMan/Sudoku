@@ -36,7 +36,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * Creates a new game with input difficulty
          * @param difficulty specified difficulty
          */
-    public void changeDifficulty(SudokuLevel difficulty) {
+    void changeDifficulty(SudokuLevel difficulty) {
         this.game = generateSudokuMatrix(difficulty);
         randomizeGameBoard(game);
         makeGameAtStartCopy();
@@ -49,7 +49,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * previously saved file
          * @param loadedGame input array that stores the full game-state.
          */
-    public void loadGame(int[][][] loadedGame) {
+    void loadGame(int[][][] loadedGame) {
         this.game = loadedGame;
         createSudokuTiles();
         updateFacadeGameState();
@@ -59,7 +59,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          *
          * @return array of the game-state (not a copy)
          */
-    public int[][][] getGame(){
+    int[][][] getGame(){
         return game;
     }
 
@@ -67,7 +67,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * returns a copy of game at initial positions (before a user has input any numbers)
          * @return array of the game-state at starting positions.
          */
-    public int[][] getGameAtStartCopy() {
+    int[][] getGameAtStartCopy() {
         return gameAtStartCopy;
     }
 
@@ -77,7 +77,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * is used when loading game from file.
          * @param gameAtStartCopy the array used to keep track of starting-numbers.
          */
-    public void setGameAtStartCopy(int[][] gameAtStartCopy) {
+    void setGameAtStartCopy(int[][] gameAtStartCopy) {
         this.gameAtStartCopy = gameAtStartCopy;
     }
 
@@ -87,7 +87,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * If the array is alreade created it just updates the values.
          * SudokuTile[][]
          */
-    public void createSudokuTiles() {
+    void createSudokuTiles() {
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 if(sudokuTiles[i][j] == null){
@@ -113,7 +113,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * @return true if equal
          */
 
-    public boolean compareSudokuMatrix(int x, int y) {
+    boolean compareSudokuMatrix(int x, int y) {
         return (game[x][y][0] == game[x][y][1]);
     }
 
@@ -123,7 +123,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * @param col specified column
          * @return a correct number from the solution matrix
          */
-    public int getACorrectNumber(int row, int col) {
+    int getACorrectNumber(int row, int col) {
         return game[row][col][1];
     }
 
@@ -134,7 +134,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * @return a string value of the sudoku number at (x,y) position
          */
 
-    public String getSudokuString(int x, int y){
+    String getSudokuString(int x, int y){
         return sudokuTiles[x][y].getNumString();
     }
 
@@ -144,7 +144,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * @param y column
          * @return true if the number at (x,y) is a start number.
          */
-    public boolean getIfSudokuStartNumber(int x, int y) {
+    boolean getIfSudokuStartNumber(int x, int y) {
         return sudokuTiles[x][y].getIfStartNr();
     }
 
@@ -153,7 +153,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * @param y specified column
          * @return the value at specified row and column
          */
-    public int getGameNr(int x, int y){
+    int getGameNr(int x, int y){
         return game[x][y][0];
     }
 
@@ -165,7 +165,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * @param y specified column
          * @param value what number to set on position
          */
-    public void setGameData(int x, int y, int value){
+    void setGameData(int x, int y, int value){
         game[x][y][0] = value;
         sudokuTiles[x][y].changeStateOnTile(value);
         updateFacadeGameState();
@@ -176,7 +176,7 @@ import static se.kth.AlgotVREmilW.labb4.model.SudokuUtilities.*;
          * @param y specified column
          * @return the value at specified row and column at games initial positions
          */
-    public int getGameAtStartNumber(int x, int y) {
+    int getGameAtStartNumber(int x, int y) {
         return gameAtStartCopy[x][y];
     }
 
