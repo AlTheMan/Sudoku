@@ -56,7 +56,7 @@ public class SudokuView extends BorderPane {
         addBottomPane();
         addEventHandlers(controller);
     }
-    private void initAndAddgrid(){
+    public void initAndAddgrid(){
         numberTiles = new Label[GRID_SIZE][GRID_SIZE];
         initNumberTiles();
         gridView= makeNumberPane();
