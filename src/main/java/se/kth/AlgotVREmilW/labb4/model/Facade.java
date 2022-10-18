@@ -20,19 +20,38 @@ public class Facade {
         gameState = model.makeGameAtStartCopy();
     }
 
+    /**
+     *
+     * @param x row
+     * @param y column
+     * @return a string value of the tile at (x,y) position
+     */
+
     public String getSudokuString(int x, int y){
         return model.getSudokuString(x, y);
     }
+
+
+    /**
+     *
+     * @param x row
+     * @param y column
+     * @return true if the tile is a starting number
+     */
     public boolean getIfSudokuStartNr(int x, int y) {
         return model.getIfSudokuStartNumber(x, y);
     }
 
+    /**
+     * Updates the gameState copy in this class
+     * @param gameState a copy of the state
+     */
     public void setGameState(int[][] gameState) {
         this.gameState = gameState;
     }
 
     /**
-     * Resets all tiles of the game to startpositions
+     * Resets all tiles of the game to starting positions
      */
     public void clearGame(){
         for(int i =0; i<GRID_SIZE; i++){
@@ -71,7 +90,7 @@ public class Facade {
 
     /**
      * Checks if game is solved
-     * @return
+     * @return true if game is solved
      */
     public boolean checkIfGameIsSolved(){
         for(int i=0; i<GRID_SIZE; i++){
