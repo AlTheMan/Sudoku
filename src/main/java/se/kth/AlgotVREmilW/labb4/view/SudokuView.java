@@ -190,6 +190,30 @@ public class SudokuView extends BorderPane {
         }
     }
 
+
+    /**
+     * Implement this to get a border around the numbers that matches the one thats clicked.
+     * Makes it easier to spot the same numbers on the grid
+     * @param
+     */
+
+    /*
+    public void setBorderOnMarkedButton(int number) {
+        setColorsForNumbers();
+        for(int i = 0; i < GRID_SIZE; i++) {
+            for(int j = 0; j < GRID_SIZE; j++) {
+                if (numberTiles[i][j].getText().equals(String.valueOf(number))){
+                    if(!facade.getIfSudokuStartNr(i, j)) {
+                        numberTiles[i][j].setStyle("-fx-border-color: darkred; -fx-text-fill: grey; -fx-border-width: 3px;");
+                    }
+                    else {
+                        numberTiles[i][j].setStyle("-fx-border-color: darkred; -fx-text-fill: black; -fx-border-width: 3px;");
+                    }
+                }
+            }
+        }
+    }*/
+
     private TilePane makeNumberPane() {
         // create the root tile pane
         TilePane root = new TilePane();
