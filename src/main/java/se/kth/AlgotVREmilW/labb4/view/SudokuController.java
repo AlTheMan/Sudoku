@@ -26,14 +26,24 @@ public class SudokuController {
 
     }
 
-    public void handleSaveGameItem()throws IOException {
-        view.saveFile();
+    public void handleSaveGameItem() {
+        try {
+            view.saveFile();
+        } catch (IOException e) {
+            view.showAlert("Something went wrong trying to save file!");
+            throw new RuntimeException(e);
+        }
     }
 
-    public void handleLoadGameItem() throws IOException,ClassNotFoundException{
-        view.loadFile();
-        view.updateAllTiles();
-        view.setColorsForNumbers();
+    public void handleLoadGameItem() {
+        try {
+            view.loadFile();
+            view.updateAllTiles();
+            view.setColorsForNumbers();
+        } catch (IOException | ClassNotFoundException e) {
+            view.showAlert("Something went wrong trying to load file!");
+            throw new RuntimeException(e);
+        }
     }
 
     public void handleNewGameItem(){
