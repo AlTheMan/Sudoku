@@ -1,4 +1,5 @@
-A fully working Sudoku graphical application written in Java and JavaFX
+A fully working Sudoku graphical application written in Java and JavaFX.
+Automatically generate a game either easy, medium, or hard.
 
 
 Created as part of lab4 project in Java course at KTH.
